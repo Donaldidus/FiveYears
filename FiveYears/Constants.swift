@@ -27,6 +27,9 @@ let TEXTVIEW_CONTAINER_INSETS = UIEdgeInsets(top: 15, left: 8, bottom: 10, right
 struct StoryboardIdentifier {
     static let memorycell = "memoryCell"
     static let allmemoriessegue = "allmemoriessegue"
+    
+    static let UnwindCancelSegue = "UnwindCancel"
+    static let UnwindMemorySegue = "UnwindMemory"
 }
 
 

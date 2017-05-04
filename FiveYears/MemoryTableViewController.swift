@@ -12,8 +12,10 @@ import FirebaseDatabase
 
 class MemoryTableViewController: UITableViewController {
 
+    /// Array containing all memory keys (timestamp from 1970 on) for the database.
     var memories: [String]?
     
+    /// Set the dateFormatter to set the date in the tableView how you'd like.
     var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "de")
@@ -72,6 +74,23 @@ class MemoryTableViewController: UITableViewController {
             self.tableView.reloadData()
         })
     }
+
+    
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // In case this is an unwind to memory segue pass it the selected memory.
+        if segue.identifier == StoryboardIdentifier.UnwindMemorySegue {
+            if let destinationVC = segue.destination as? MemoryViewController {
+                if let selectedCell = sender as? UITableViewCell {
+                    let selectedPath = tableView.indexPath(for: selectedCell)!
+                    if let memos = memories {
+                        destinationVC.currentMemory = memos[selectedPath.row]
+                    }
+                }
+            }
+        }
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StoryboardIdentifier.memorycell, for: indexPath)
@@ -88,23 +107,5 @@ class MemoryTableViewController: UITableViewController {
         }
         return cell
     }
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

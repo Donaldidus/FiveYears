@@ -93,6 +93,10 @@ class MemoryViewController: UIViewController {
         }
     }
     
+    @IBAction func goBack(segue: UIStoryboardSegue) {
+        // Nothing happening here. See MemoryTableViewController's prepareforsegue.
+    }
+    
     /// The segment control enables to switch between Images and Text indexes: images - 0; text - 1
     @IBOutlet weak var segmentCtrl: UISegmentedControl!
     
