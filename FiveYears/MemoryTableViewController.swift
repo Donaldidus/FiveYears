@@ -66,7 +66,7 @@ class MemoryTableViewController: UITableViewController {
         // run the firebase query for all memories in the past (ignore future memories)
         DataService.ds.REF_MEMORIES.queryEnding(atValue: nil, childKey: today).observe(.value, with: { (snapshot) in
             // The first child is the latest database entry.
-            for child in snapshot.children {
+            for child in snapshot.children.reversed() {
                 if let childSnap = child as? FIRDataSnapshot {
                     self.memories?.append(childSnap.key)
                 }
