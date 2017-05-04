@@ -26,7 +26,7 @@ class MemoryViewController: UIViewController {
     }
     
     
-    /// The text that is displayed in the textView.
+    /// The text displayed in the textView.
     var text: String? {
         didSet {
             if let memoryText = text {
@@ -115,14 +115,6 @@ class MemoryViewController: UIViewController {
         segmentChanged(segmentCtrl)
     }
     
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == StoryboardIdentifier.allmemoriessegue {
-            
-        }
-    }
- */
-    
     /// Causes the imageSlideShow take over the entire screen.
     func imgFullscreen() {
         imageSlideShow.presentFullScreenController(from: self)
@@ -209,7 +201,11 @@ class MemoryViewController: UIViewController {
             })
         } else {
             // Get the latest database entry.
-            DataService.ds.REF_MEMORIES.queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
+            
+            // get the current date and remove decimal (firebase won't accept floating point)
+            let today = String(Int(Date().timeIntervalSince1970))
+            
+            DataService.ds.REF_MEMORIES.queryEnding(atValue: nil, childKey: today).queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
                 // The first child is the latest database entry.
                 let childSnap = snapshot.children.allObjects[0] as! FIRDataSnapshot
                 self.extractData(from: childSnap)
