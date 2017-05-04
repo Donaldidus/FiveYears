@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D0576621EBB96AF00E8F3A7 /* MemoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */; };
 		3D22059B1EB91C1000BBE9A2 /* testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D22059A1EB91C1000BBE9A2 /* testing.swift */; };
 		3D2648FB1EACFA9A003B1FF6 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2648FA1EACFA9A003B1FF6 /* HeartButton.swift */; };
 		3D337CE61EB11F9700CF62FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D337CE51EB11F9700CF62FD /* GoogleService-Info.plist */; };
@@ -19,11 +20,13 @@
 		3DBAE2571EAA51F800AD136E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBAE2561EAA51F800AD136E /* Assets.xcassets */; };
 		3DBAE25A1EAA51F800AD136E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBAE2581EAA51F800AD136E /* LaunchScreen.storyboard */; };
 		3DBAE2671EAA5BF800AD136E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBAE2661EAA5BF800AD136E /* Constants.swift */; };
+		3DD3CAB91EBB98F8003D043A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD3CAB81EBB98F8003D043A /* Extensions.swift */; };
 		83111F548F0130BDFB6F8C41 /* Pods_FiveYears.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E08B6659EB2241AFC4A4E0A /* Pods_FiveYears.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		25EC580C7CFFB1AB3830C94C /* Pods-FiveYears.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiveYears.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FiveYears/Pods-FiveYears.debug.xcconfig"; sourceTree = "<group>"; };
+		3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewCell.swift; sourceTree = "<group>"; };
 		3D22059A1EB91C1000BBE9A2 /* testing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testing.swift; sourceTree = "<group>"; };
 		3D2648FA1EACFA9A003B1FF6 /* HeartButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		3D337CE51EB11F9700CF62FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 		3DBAE2591EAA51F800AD136E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DBAE25B1EAA51F800AD136E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DBAE2661EAA5BF800AD136E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3DD3CAB81EBB98F8003D043A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		46CF86895BF236E38086E6A4 /* Pods-FiveYears.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiveYears.release.xcconfig"; path = "Pods/Target Support Files/Pods-FiveYears/Pods-FiveYears.release.xcconfig"; sourceTree = "<group>"; };
 		6E08B6659EB2241AFC4A4E0A /* Pods_FiveYears.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FiveYears.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,6 +101,7 @@
 				3D22059A1EB91C1000BBE9A2 /* testing.swift */,
 				3DBAE2661EAA5BF800AD136E /* Constants.swift */,
 				3DBAE2531EAA51F800AD136E /* Main.storyboard */,
+				3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */,
 				3D2648FA1EACFA9A003B1FF6 /* HeartButton.swift */,
 				3DBAE2611EAA520700AD136E /* Supporting Files */,
 			);
@@ -106,6 +111,7 @@
 		3DBAE2611EAA520700AD136E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3DD3CAB81EBB98F8003D043A /* Extensions.swift */,
 				3D337CEA1EB527A100CF62FD /* Credentials.swift */,
 				3DBAE24F1EAA51F800AD136E /* AppDelegate.swift */,
 				3DBAE2561EAA51F800AD136E /* Assets.xcassets */,
@@ -252,8 +258,10 @@
 			files = (
 				3D337CE91EB51E9700CF62FD /* DataService.swift in Sources */,
 				3D337CEB1EB527A100CF62FD /* Credentials.swift in Sources */,
+				3D0576621EBB96AF00E8F3A7 /* MemoryTableViewCell.swift in Sources */,
 				3D93A26F1EBB529800536DA9 /* MemoryTableViewController.swift in Sources */,
 				3DBAE2521EAA51F800AD136E /* MemoryViewController.swift in Sources */,
+				3DD3CAB91EBB98F8003D043A /* Extensions.swift in Sources */,
 				3DBAE2501EAA51F800AD136E /* AppDelegate.swift in Sources */,
 				3D2648FB1EACFA9A003B1FF6 /* HeartButton.swift in Sources */,
 				3D22059B1EB91C1000BBE9A2 /* testing.swift in Sources */,

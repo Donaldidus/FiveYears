@@ -95,15 +95,18 @@ class MemoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StoryboardIdentifier.memorycell, for: indexPath)
         
-        if let memo = memories {
-            // query the firebase database for the title of the given memory
-            DataService.ds.REF_MEMORIES.child(memo[indexPath.row]).child(DataBaseKeys.title).observe(.value, with: { (snapshot) in
-                // set the text of the cell to the title received from database
-                cell.textLabel?.text = snapshot.value as? String ?? "No title available."
-                // read timestamp from memories (default is 18. May 2012) and convert it to a readable date
-                let timestamp = Double(memo[indexPath.row]) ?? 1337299200 // = 18th May 2012
-                cell.detailTextLabel?.text = self.dateFor(timestamp: timestamp)
-            })
+        if let memoryCell = cell as? MemoryTableViewCell {
+            if let memo = memories {
+                // query the firebase database for the title of the given memory
+                DataService.ds.REF_MEMORIES.child(memo[indexPath.row]).child(DataBaseKeys.title).observe(.value, with: { (snapshot) in
+                    // set the text of the cell to the title received from database
+                    memoryCell.titleLabel.text = snapshot.value as? String ?? "No title available."
+                    // read timestamp from memories (default is 18. May 2012) and convert it to a readable date
+                    let timestamp = Double(memo[indexPath.row]) ?? 1337299200 // = 18th May 2012
+                    memoryCell.dateLabel.text = self.dateFor(timestamp: timestamp)
+                })
+            }
+            return memoryCell
         }
         return cell
     }
