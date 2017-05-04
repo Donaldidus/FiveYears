@@ -46,9 +46,10 @@ class MemoryViewController: UIViewController {
     /// Will cause to reload the content. See reloadContent(forTimestamp: ...) for more info.
     ///
     /// - Parameter sender: Button calling the function.
-    @IBAction func reloadContent(_ sender: UIButton) {
+    @IBAction func reloadContent(_ sender: UIBarButtonItem) {
         reloadContent(forTimestamp: currentMemory)
     }
+    
     
     /// imageSlideShow shows the images assigned in the images variable.
     var imageSlideShow = ImageSlideshow()

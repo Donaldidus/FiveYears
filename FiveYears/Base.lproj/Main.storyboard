@@ -35,36 +35,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vjc-Xx-hRO">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="0yh-Wb-TY1">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="itk-No-b0Z">
-                                <rect key="frame" x="16" y="7" width="68" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Memories"/>
-                                <connections>
-                                    <segue destination="jVS-wu-uTh" kind="presentation" identifier="allmemoriessegue" id="EmU-sV-ZOa"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" image="heart_fetch-40" id="66s-LE-daJ">
+                            <connections>
+                                <segue destination="jVS-wu-uTh" kind="presentation" identifier="allmemoriessegue" id="3Qi-zL-A5L"/>
+                            </connections>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="ZBy-0H-ym7">
-                            <rect key="frame" x="90.5" y="7.5" width="139" height="29"/>
+                            <rect key="frame" x="82" y="6.5" width="156" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="Images"/>
-                                <segment title="Text"/>
+                                <segment title="Fotos"/>
+                                <segment title="Nachricht"/>
                             </segments>
                             <connections>
                                 <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="kg0-4F-1vM"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="ZVG-1J-KcJ">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Yu4-NZ-2n4">
-                                <rect key="frame" x="257" y="7" width="47" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Reload"/>
-                                <connections>
-                                    <action selector="reloadContent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sXK-vD-N5w"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" image="heart_reload-40" id="HsT-Nl-Txc">
+                            <connections>
+                                <action selector="reloadContent:" destination="BYZ-38-t0r" id="GrX-8u-edg"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -76,7 +66,7 @@
             </objects>
             <point key="canvasLocation" x="1012.5" y="137.32394366197184"/>
         </scene>
-        <!--Old Memories-->
+        <!--Erinnerungen-->
         <scene sceneID="7Q4-jp-U3L">
             <objects>
                 <tableViewController id="gTV-XV-Uaw" customClass="MemoryTableViewController" customModule="FiveYears" customModuleProvider="target" sceneMemberID="viewController">
@@ -91,7 +81,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="onf-xG-hTf" id="DTL-QC-K0w">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="xO4-gZ-cVj">
@@ -133,16 +123,11 @@
                             <outlet property="delegate" destination="gTV-XV-Uaw" id="Lm2-KT-fjW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Old Memories" id="gCv-qi-KA9">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="3sW-dh-CI2">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lC6-Iq-wqK">
-                                <rect key="frame" x="16" y="7" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <segue destination="RA3-ZF-3tt" kind="unwind" identifier="UnwindCancel" unwindAction="goBackWithSegue:" id="KlF-yI-EM5"/>
-                                </connections>
-                            </button>
+                    <navigationItem key="navigationItem" title="Erinnerungen" id="gCv-qi-KA9">
+                        <barButtonItem key="leftBarButtonItem" title="Zurück" id="b1j-Kg-ZGD">
+                            <connections>
+                                <segue destination="RA3-ZF-3tt" kind="unwind" identifier="UnwindCancel" unwindAction="goBackWithSegue:" id="iN5-bd-Ecy"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -189,4 +174,8 @@
             <point key="canvasLocation" x="1961.25" y="137.32394366197184"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="heart_fetch-40" width="40" height="40"/>
+        <image name="heart_reload-40" width="40" height="40"/>
+    </resources>
 </document>
