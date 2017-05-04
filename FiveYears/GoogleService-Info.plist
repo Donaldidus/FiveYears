@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>385858803943-beg6tplpfgf1one15aejk31vaqqtg11g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.385858803943-beg6tplpfgf1one15aejk31vaqqtg11g</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDu6WcWvGy79ZGFvqkAMObEgMDWWK9g7Xk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>385858803943</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.busse.jan.FiveYears</string>
+	<key>PROJECT_ID</key>
+	<string>fiveyears-b7755</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fiveyears-b7755.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:385858803943:ios:9b52ad1e0497e5a3</string>
+	<key>DATABASE_URL</key>
+	<string>https://fiveyears-b7755.firebaseio.com</string>
+</dict>
+</plist>
