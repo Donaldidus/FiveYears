@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: UI Colors sizes etc
 
-let BACKGROUND_COLOR = UIColor(hexString: "#87475d")
+let BACKGROUND_COLOR = UIColor(hexString: "#F06292") // #87475d
 
 let HEART_COLOR = UIColor(hexString: "#cc0000")
 

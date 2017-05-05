@@ -36,6 +36,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="vjc-Xx-hRO">
                         <barButtonItem key="leftBarButtonItem" image="heart_fetch-40" id="66s-LE-daJ">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="jVS-wu-uTh" kind="presentation" identifier="allmemoriessegue" id="3Qi-zL-A5L"/>
                             </connections>
@@ -47,11 +48,13 @@
                                 <segment title="Fotos"/>
                                 <segment title="Nachricht"/>
                             </segments>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="kg0-4F-1vM"/>
                             </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" image="heart_reload-40" id="HsT-Nl-Txc">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="reloadContent:" destination="BYZ-38-t0r" id="GrX-8u-edg"/>
                             </connections>
@@ -73,7 +76,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" id="UUc-7s-Zs5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.96078431372549022" green="0.4823529411764706" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.94117647058823528" green="0.38431372549019605" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
@@ -109,7 +112,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="xO4-gZ-cVj" secondAttribute="trailing" id="dr3-WZ-3El"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.96078431372549022" green="0.4823529411764706" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.94117647059999998" green="0.38431372549999998" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="dateLabel" destination="sdJ-nU-6hf" id="bnV-D6-AYy"/>
@@ -125,8 +128,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Erinnerungen" id="gCv-qi-KA9">
                         <barButtonItem key="leftBarButtonItem" title="Zurück" id="b1j-Kg-ZGD">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="RA3-ZF-3tt" kind="unwind" identifier="UnwindCancel" unwindAction="goBackWithSegue:" id="iN5-bd-Ecy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="heart_reload-40" id="X9k-fU-FdE">
+                            <connections>
+                                <action selector="reloadContent:" destination="gTV-XV-Uaw" id="Fxm-5E-b8E"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -144,6 +153,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UmF-TB-V6R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.9137254901960784" green="0.11764705882352941" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -162,7 +172,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="R9v-Uh-V7d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.96078431372549022" green="0.4823529411764706" blue="0.63921568627450975" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.9137254901960784" green="0.11764705882352941" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

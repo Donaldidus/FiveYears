@@ -29,6 +29,19 @@ class MemoryTableViewController: UITableViewController {
         
         fetchMemories()
         
+        // This will cause the tableView to not display any empty cells/rows.
+        tableView.tableFooterView = UIView(frame: .zero)
+        
+        // If the MemoryTableVC is embedded in a Navigation Controller set the Textcolor to white
+        // (I didn't find any way to set this in the Storyboard :O)
+        if let navController = self.navigationController {
+            navController.navigationBar.tintColor = UIColor.white
+        }
+        
+    }
+    
+    @IBAction func reloadContent(_ sender: UIBarButtonItem) {
+        fetchMemories()
     }
 
     // MARK: - Table view data source
