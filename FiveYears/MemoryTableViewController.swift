@@ -124,7 +124,7 @@ class MemoryTableViewController: UITableViewController {
     private func animateReloadButton() {
         if loading {
             self.reloadButton.customView!.tintColor = RELOAD_BUTTON_ANIMATION_COLOR
-            UIView.animate(withDuration: 1.0, delay: 0.0, options: [.autoreverse, .curveEaseIn, .repeat], animations: {
+            UIView.animate(withDuration: 1.0, delay: 0.7, options: [.autoreverse, .curveEaseIn, .repeat], animations: {
                 self.reloadButton.customView!.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
                 
             }, completion: { (completed) in
