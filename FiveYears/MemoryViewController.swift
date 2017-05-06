@@ -10,6 +10,7 @@ import UIKit
 import ImageSlideshow
 import FirebaseAuth
 import FirebaseDatabase
+import PopupDialog
 
 
 class MemoryViewController: UIViewController {
@@ -139,6 +140,8 @@ class MemoryViewController: UIViewController {
         insertTestContent()
         
         authenticateFirebase()
+        
+        newNotification()
         
         segmentChanged(segmentCtrl)
     }
@@ -293,6 +296,51 @@ class MemoryViewController: UIViewController {
                 self.reloadButton.customView!.tintColor = UIColor.white
             })
         }
+    }
+    
+    private func newNotification() {
+        DataService.ds.REF_NOTIFICATIONS.queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
+            // The first child is the latest database entry.
+            let childSnap = snapshot.children.allObjects[0] as! FIRDataSnapshot
+            if childSnap.hasChild(DataBaseNotificationKeys.dismissed) {
+                if let dismissed = childSnap.childSnapshot(forPath: DataBaseNotificationKeys.dismissed).value as? Bool {
+                    if !dismissed {
+                        
+                        let notificationDispatchGroup = DispatchGroup()
+                        var image: UIImage? = nil
+                        var message: String? = nil
+                        
+                        if childSnap.hasChild(DataBaseNotificationKeys.image) {
+                            if let imgURL = childSnap.childSnapshot(forPath: DataBaseNotificationKeys.image).value as? String {
+                                let imgREF = storage.reference(forURL: imgURL)
+                                
+                                notificationDispatchGroup.enter()
+                                imgREF.data(withMaxSize: 10 * 1024 * 1024, completion: { data, error in
+                                    if let img = UIImage(data: data!) {
+                                        image = img
+                                        notificationDispatchGroup.leave()
+                                    }
+                                })
+                            }
+                        }
+                        if let mssg = childSnap.childSnapshot(forPath: DataBaseNotificationKeys.message).value as? String {
+                            notificationDispatchGroup.enter()
+                            message = mssg
+                            notificationDispatchGroup.leave()
+                        }
+                        notificationDispatchGroup.notify(queue: DispatchQueue.main, execute: {
+                            let popover = PopupDialog(title: nil, message: message, image: image)
+                            let button = PopupDialogButton(title: "Weiter", action: nil)
+                            popover.addButton(button)
+                            
+                            // TODO: Set dismissed value on completion.
+                            self.present(popover, animated: true, completion: nil)
+                        })
+                        
+                    }
+                }
+            }
+        })
     }
 }
 

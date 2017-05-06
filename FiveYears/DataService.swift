@@ -22,6 +22,7 @@ class DataService {
     
     private var _REF_BASE = DB_BASE
     private var _REF_MEMORIES = DB_BASE.child("memories")
+    private var _REF_NOTIFICATIONS = DB_BASE.child("notifications")
     
     var REF_BASE: FIRDatabaseReference {
         return _REF_BASE
@@ -30,10 +31,20 @@ class DataService {
     var REF_MEMORIES: FIRDatabaseReference {
         return _REF_MEMORIES
     }
+    
+    var REF_NOTIFICATIONS: FIRDatabaseReference {
+        return _REF_NOTIFICATIONS
+    }
 }
 
 struct DataBaseKeys {
     static let title = "title"
     static let text = "text"
     static let images = "images"
+}
+
+struct DataBaseNotificationKeys {
+    static let message = "message"
+    static let image = "image"
+    static let dismissed = "dismissed"
 }
