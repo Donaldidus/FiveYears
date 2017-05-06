@@ -233,16 +233,20 @@ class MemoryViewController: UIViewController {
     ///
     /// - Parameter snapshot: The snapshot the data is to be extracted from.
     private func extractData(from snapshot: FIRDataSnapshot) {
+        
         let text = snapshot.childSnapshot(forPath: DataBaseKeys.text).value as? String ?? "No text available."
         self.text = text
         let images = snapshot.childSnapshot(forPath: DataBaseKeys.images).children
         
         var imgSources = [ImageSource]()
         
+        let imageDownloadDispatchGroup = DispatchGroup()
+        
         for image in images {
             if let imgURL = (image as? FIRDataSnapshot)?.value as? String {
                 let imgREF = storage.reference(forURL: imgURL)
                 loading = true
+                imageDownloadDispatchGroup.enter()
                 imgREF.data(withMaxSize: 10 * 1024 * 1024, completion: { data, error in
                     if let error = error {
                         print(error.localizedDescription)
@@ -251,11 +255,15 @@ class MemoryViewController: UIViewController {
                             imgSources.append(ImageSource(image: img))
                         }
                     }
-                    self.images = imgSources
-                    self.loading = false
+                    imageDownloadDispatchGroup.leave()
                 })
             }
         }
+        
+        imageDownloadDispatchGroup.notify(queue: DispatchQueue.main, execute: {
+            self.images = imgSources
+            self.loading = false
+        })
     }
     
     /// Signes the account given in the credentials into Firebase if possible.

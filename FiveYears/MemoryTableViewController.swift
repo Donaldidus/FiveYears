@@ -56,6 +56,7 @@ class MemoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Fetch the memories from the Database and reloadthetableview
         fetchMemories()
         
         // This will cause the tableView to not display any empty cells/rows.
