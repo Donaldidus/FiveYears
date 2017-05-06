@@ -55,13 +55,11 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" image="heart_reload-40" id="HsT-Nl-Txc">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="reloadContent:" destination="BYZ-38-t0r" id="GrX-8u-edg"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="contentView" destination="2xw-hU-nLj" id="t2Q-O7-Ziw"/>
+                        <outlet property="reloadButton" destination="HsT-Nl-Txc" id="DNi-8z-Co5"/>
                         <outlet property="segmentCtrl" destination="ZBy-0H-ym7" id="qsc-L5-jbM"/>
                     </connections>
                 </viewController>
@@ -133,12 +131,11 @@
                                 <segue destination="RA3-ZF-3tt" kind="unwind" identifier="UnwindCancel" unwindAction="goBackWithSegue:" id="iN5-bd-Ecy"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="heart_reload-40" id="X9k-fU-FdE">
-                            <connections>
-                                <action selector="reloadContent:" destination="gTV-XV-Uaw" id="Fxm-5E-b8E"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="heart_reload-40" id="X9k-fU-FdE"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="reloadButton" destination="X9k-fU-FdE" id="Jsd-Aw-EhZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQE-aw-wNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="RA3-ZF-3tt" userLabel="Exit" sceneMemberID="exit"/>
@@ -153,6 +150,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UmF-TB-V6R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.9137254901960784" green="0.11764705882352941" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

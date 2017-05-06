@@ -25,6 +25,18 @@ class MemoryViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var reloadButton: UIBarButtonItem! {
+        didSet {
+            // Do setup of the button
+            let icon = #imageLiteral(resourceName: "heart_reload-40")
+            let iconSize = CGRect(origin: .zero, size: icon.size)
+            let iconButton = UIButton(frame: iconSize)
+            iconButton.setBackgroundImage(icon, for: .normal)
+            reloadButton.customView = iconButton
+            
+            iconButton.addTarget(self, action: #selector(reloadContent(_:)), for: .touchUpInside)
+        }
+    }
     
     /// The text displayed in the textView.
     var text: String? {
@@ -46,7 +58,7 @@ class MemoryViewController: UIViewController {
     /// Will cause to reload the content. See reloadContent(forTimestamp: ...) for more info.
     ///
     /// - Parameter sender: Button calling the function.
-    @IBAction func reloadContent(_ sender: UIBarButtonItem) {
+    func reloadContent(_ sender: UIBarButtonItem) {
         reloadContent(forTimestamp: currentMemory)
     }
     
@@ -64,6 +76,21 @@ class MemoryViewController: UIViewController {
         txtvw.textContainerInset = TEXTVIEW_CONTAINER_INSETS
         return txtvw
     }()
+    
+    private var loading = false {
+        didSet {
+            // check if bool value has changed
+            if loading != oldValue {
+                if loading {
+                    // If loading start the reload animation
+                    animateReloadButton()
+                } else {
+                    // stop animation if not loading anymore
+                    reloadButton.customView?.layer.removeAllAnimations()
+                }
+            }
+        }
+    }
     
     
     /// The parent view of the textView and the imageSlideShow.
@@ -130,20 +157,6 @@ class MemoryViewController: UIViewController {
         text = longTestText
     }
     
-    
-    /*
-    private func startHeartBeat() {
-        UIView.animate(withDuration: 1.2, delay: 0.1, options: [.repeat, .autoreverse, .allowUserInteraction, .curveEaseOut], animations: {
-            let newSize = CGSize(width: self.heart.bounds.width * HEART_BEAT_RESIZE, height: self.heart.bounds.height * HEART_BEAT_RESIZE)
-            self.heart.bounds = CGRect(origin: self.heart.bounds.origin, size: newSize)
-        }, completion: nil)
-    }
-    
-    private func stopHeartBeat() {
-        heart.layer.removeAllAnimations()
-    }*/
-    
-    
     private func loveRain(pieces: Int) {
         for _ in 0..<pieces {
             let image = UIImageView(image: randomRosePlate())
@@ -194,6 +207,7 @@ class MemoryViewController: UIViewController {
     
     private func reloadContent(forTimestamp timestamp: String? = nil) {
         // Reload content
+        loading = true
         if let key = timestamp {
             // Get the database entry for the given timestamp.
             DataService.ds.REF_MEMORIES.child(key).observe(.value, with: { (snapshot) in
@@ -228,6 +242,7 @@ class MemoryViewController: UIViewController {
         for image in images {
             if let imgURL = (image as? FIRDataSnapshot)?.value as? String {
                 let imgREF = storage.reference(forURL: imgURL)
+                loading = true
                 imgREF.data(withMaxSize: 10 * 1024 * 1024, completion: { data, error in
                     if let error = error {
                         print(error.localizedDescription)
@@ -237,6 +252,7 @@ class MemoryViewController: UIViewController {
                         }
                     }
                     self.images = imgSources
+                    self.loading = false
                 })
             }
         }
@@ -249,7 +265,7 @@ class MemoryViewController: UIViewController {
             if error != nil {
                 print(error.debugDescription)
                 let message = error?.localizedDescription
-                let alert = UIAlertController(title: "Login Error", message: message, preferredStyle: .alert)
+                let alert = UIAlertController(title: "Database Login Error", message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
                 alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { (alert: UIAlertAction) in
                     self.authenticateFirebase()
@@ -259,5 +275,16 @@ class MemoryViewController: UIViewController {
         }
     }
     
+    private func animateReloadButton() {
+        if loading {
+            self.reloadButton.customView!.tintColor = RELOAD_BUTTON_ANIMATION_COLOR
+            UIView.animate(withDuration: 1.0, delay: 0.0, options: [.autoreverse, .curveEaseIn, .repeat], animations: {
+                self.reloadButton.customView!.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                
+            }, completion: { (completed) in
+                self.reloadButton.customView!.tintColor = UIColor.white
+            })
+        }
+    }
 }
 

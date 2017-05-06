@@ -24,6 +24,35 @@ class MemoryTableViewController: UITableViewController {
         return formatter
     }()
     
+    @IBOutlet weak var reloadButton: UIBarButtonItem! {
+        didSet {
+            // Do setup of the button
+            let icon = #imageLiteral(resourceName: "heart_reload-40")
+            let iconSize = CGRect(origin: .zero, size: icon.size)
+            let iconButton = UIButton(frame: iconSize)
+            iconButton.setBackgroundImage(icon, for: .normal)
+            reloadButton.customView = iconButton
+            
+            iconButton.addTarget(self, action: #selector(reloadContent(_:)), for: .touchUpInside)
+        }
+    }
+    
+    
+    private var loading = false {
+        didSet {
+            // check if bool value has changed
+            if loading != oldValue {
+                if loading {
+                    // If loading start the reload animation
+                    animateReloadButton()
+                } else {
+                    // stop animation if not loading anymore
+                    reloadButton.customView?.layer.removeAllAnimations()
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +69,7 @@ class MemoryTableViewController: UITableViewController {
         
     }
     
-    @IBAction func reloadContent(_ sender: UIBarButtonItem) {
+    func reloadContent(_ sender: UIBarButtonItem) {
         fetchMemories()
     }
 
@@ -70,6 +99,8 @@ class MemoryTableViewController: UITableViewController {
     
     /// Fetches all available memory keys from the database and stores them in the memories property.
     private func fetchMemories() {
+        loading = true
+        
         // Empty all preloaded memories
         memories = [String]()
         
@@ -85,7 +116,20 @@ class MemoryTableViewController: UITableViewController {
                 }
             }
             self.tableView.reloadData()
+            self.loading = false
         })
+    }
+    
+    private func animateReloadButton() {
+        if loading {
+            self.reloadButton.customView!.tintColor = RELOAD_BUTTON_ANIMATION_COLOR
+            UIView.animate(withDuration: 1.0, delay: 0.0, options: [.autoreverse, .curveEaseIn, .repeat], animations: {
+                self.reloadButton.customView!.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                
+            }, completion: { (completed) in
+                self.reloadButton.customView!.tintColor = UIColor.white
+            })
+        }
     }
 
     
@@ -123,5 +167,4 @@ class MemoryTableViewController: UITableViewController {
         }
         return cell
     }
-
 }
