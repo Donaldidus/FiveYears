@@ -29,15 +29,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PopupDialog.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7A6997542806824CA16C2DC9F606CB29</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>EADFCBE4E9E0CC3BDECEE1193D1C4FA6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>F1883A945C236CDCF166DE672D76F89C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F80FACF36BB94BA7592951866D4D5B45</key>
 		<dict>
 			<key>primary</key>
 			<true/>

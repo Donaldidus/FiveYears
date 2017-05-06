@@ -6,6 +6,7 @@ target 'FiveYears' do
   use_frameworks!
 
   # Pods for FiveYears
+  pod 'PopupDialog'
   pod 'ImageSlideshow'
   pod 'Firebase'
   pod 'Firebase/Database'

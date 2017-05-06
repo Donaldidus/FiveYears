@@ -44,6 +44,7 @@ PODS:
   - ImageSlideshow (1.2.0):
     - ImageSlideshow/Core (= 1.2.0)
   - ImageSlideshow/Core (1.2.0)
+  - PopupDialog (0.5.4)
 
 DEPENDENCIES:
   - Firebase
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - ImageSlideshow
+  - PopupDialog
 
 SPEC CHECKSUMS:
   Firebase: 21bf4a89d3f01bfbe11adc3a5d934a4a3d3a5fd6
@@ -63,7 +65,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   ImageSlideshow: c1395dcf33f7dba407fd21df0e8c315e8941e209
+  PopupDialog: 75cf955693590b0cb2fdde00223fb65d99c57247
 
-PODFILE CHECKSUM: 6d3035263ddf3f557ec6034c3fb665d4d083ea5b
+PODFILE CHECKSUM: e8009c0e44606b5eb9aa2bf744f75c29113b3c9c
 
 COCOAPODS: 1.2.0
