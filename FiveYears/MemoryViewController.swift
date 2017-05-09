@@ -78,6 +78,21 @@ class MemoryViewController: UIViewController {
         return txtvw
     }()
     
+    var rainRoses = false {
+        didSet {
+            if rainRoses {
+                loveRain()
+            } else {
+                if rainTimer != nil {
+                    rainTimer!.invalidate()
+                    rainTimer = nil
+                }
+            }
+        }
+    }
+    
+    var rainTimer: Timer? = nil
+    
     private var loading = false {
         didSet {
             // check if bool value has changed
@@ -141,7 +156,9 @@ class MemoryViewController: UIViewController {
         
         authenticateFirebase()
         
-        newNotification()
+        // newNotification()
+        
+        rainRoses = true
         
         segmentChanged(segmentCtrl)
     }
@@ -160,25 +177,27 @@ class MemoryViewController: UIViewController {
         text = longTestText
     }
     
-    private func loveRain(pieces: Int) {
-        for _ in 0..<pieces {
-            let image = UIImageView(image: randomRosePlate())
-            
-            let path = randomPath(rect: view.bounds)
-            image.frame = CGRect(origin: path.currentPoint, size: CGSize(width: 30.0, height: 30.0))
-            
-            let animation = CAKeyframeAnimation(keyPath: "position")
-            
-            animation.path = path.cgPath
-            animation.duration = 0.5 + drand48()
-            animation.fillMode = kCAFillModeForwards
-            animation.isRemovedOnCompletion = true
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-            
-            image.layer.add(animation, forKey: nil)
-            
-            view.addSubview(image)
-        }
+    func loveRain() {
+        let image = UIImageView(image: randomRosePlate())
+        
+        let path = randomPath(rect: view.bounds)
+        image.frame = CGRect(origin: path.currentPoint, size: CGSize(width: 30.0, height: 30.0))
+        
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        
+        animation.path = path.cgPath
+        animation.duration = 1.5 + drand48()
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = true
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        
+        image.layer.add(animation, forKey: nil)
+        
+        view.addSubview(image)
+        
+        let timeTillNextDrop = drand48() * 3
+        
+        rainTimer = Timer.scheduledTimer(timeInterval: timeTillNextDrop, target: self, selector: #selector(loveRain), userInfo: nil, repeats: false)
     }
     
     /// Creates a straight path from the top to the buttom of the given rectangle at a random x location.
