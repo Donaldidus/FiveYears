@@ -75,6 +75,7 @@ class MemoryViewController: UIViewController {
         txtvw.font = TEXT_FONT
         txtvw.textAlignment = .justified
         txtvw.textContainerInset = TEXTVIEW_CONTAINER_INSETS
+        txtvw.isEditable = false
         return txtvw
     }()
     
@@ -156,7 +157,7 @@ class MemoryViewController: UIViewController {
         
         authenticateFirebase()
         
-        // newNotification()
+        newNotification()
         
         rainRoses = true
         
