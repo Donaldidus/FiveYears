@@ -39,9 +39,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        print("disappearing")
-        
+                
         // Save the settings before dismissing the settingsVC
         UserDefaults.standard.save(usersettings: settings)
     }
@@ -77,6 +75,13 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
                 self.resetUIToSettings()
             }))
         present(alert, animated: true, completion: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        // Set the color of the headers to white
+        view.tintColor = UIColor.white
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.white
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
