@@ -134,6 +134,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="heart_reload-40" id="X9k-fU-FdE"/>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="62U-rs-oQ1">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="reloadButton" destination="X9k-fU-FdE" id="Jsd-Aw-EhZ"/>
                     </connections>
@@ -467,6 +470,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bhV-i3-ma5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="oQC-IY-n00">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

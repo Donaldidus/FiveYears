@@ -48,6 +48,8 @@ class MemoryTableViewController: UITableViewController {
                 } else {
                     // stop animation if not loading anymore
                     reloadButton.customView?.layer.removeAllAnimations()
+                    // stop refreshControl
+                    self.refreshControl?.endRefreshing()
                 }
             }
         }
@@ -68,6 +70,7 @@ class MemoryTableViewController: UITableViewController {
             navController.navigationBar.tintColor = UIColor.white
         }
         
+        self.refreshControl?.addTarget(self, action: #selector(fetchMemories), for: UIControlEvents.valueChanged)
     }
     
     func reloadContent(_ sender: UIBarButtonItem) {
@@ -99,7 +102,7 @@ class MemoryTableViewController: UITableViewController {
     }
     
     /// Fetches all available memory keys from the database and stores them in the memories property.
-    private func fetchMemories() {
+    func fetchMemories() {
         loading = true
         
         // Empty all preloaded memories
