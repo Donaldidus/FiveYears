@@ -297,7 +297,7 @@ class MemoryViewController: UIViewController {
                 print(error.debugDescription)
                 let message = error?.localizedDescription
                 let alert = UIAlertController(title: "Database Login Error", message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { (alert: UIAlertAction) in
                     self.authenticateFirebase()
                 }))

@@ -10,76 +10,94 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var rainSwitch: UISwitch!
+    
+    @IBOutlet weak var autoReloadSwitch: UISwitch!
+    
+    @IBOutlet weak var fontSizeLabel: UILabel!
+    
+    @IBOutlet weak var fontSizeSlider: UISlider! {
+        didSet {
+            fontSizeLabel.text = String(Int(fontSizeSlider.value))
+        }
+    }
+    
+    @IBOutlet weak var mailTextField: UITextField!
+    
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    var settings = UserDefaults.standard.getUserSettings()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // If the SettingsTableVC is embedded in a Navigation Controller set the Textcolor to white
-        // (I didn't find any way to set this in the Storyboard :O)
-        if let navController = self.navigationController {
-            navController.navigationBar.tintColor = UIColor.white
+        resetUIToSettings()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        print("disappearing")
+        
+        // Save the settings before dismissing the settingsVC
+        UserDefaults.standard.save(usersettings: settings)
+    }
+    
+    @IBAction func rainSwitchChanged(_ sender: UISwitch) {
+        settings.rainEnabled = sender.isOn
+    }
+    
+    @IBAction func autoReloadChanged(_ sender: UISwitch) {
+        settings.autoreloadEnabled = sender.isOn
+    }
+    
+    @IBAction func fontSizeSliderChanged(_ sender: UISlider) {
+        sender.setValue(sender.value.rounded(), animated: false)
+        
+        settings.fontSize = Int(sender.value)
+        fontSizeLabel.text = String(Int(sender.value))
+    }
+    
+    @IBAction func mailTextFieldEndedEditing(_ sender: UITextField) {
+        settings.loginEmail = sender.text
+    }
+    
+    @IBAction func passwordTextFieldEndedEditing(_ sender: UITextField) {
+        settings.loginPassword = sender.text
+    }
+    
+    @IBAction func resetSettings(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Einstellungen zurücksetzen", message: "Willst du wirklich alle Einstellungen zurücksetzen? Deine Login Daten werden ebenfalls zurückgesetzt und müssen erneut eingegeben werden. Ohne gültigen Login können keine Erinnerungen abgerufen werden.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Zurücksetzen", style: .destructive, handler: { (alert: UIAlertAction) in
+                self.settings = UserSettings()
+                self.resetUIToSettings()
+            }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func resetUIToSettings() {
+        if let size = settings.fontSize {
+            fontSizeSlider.value = Float(size)
+        } else {
+            fontSizeSlider.value = 17.0
+        }
+        if let rain = settings.rainEnabled {
+            rainSwitch.isOn = rain
+        } else {
+            rainSwitch.isOn = true
+        }
+        if let auto = settings.autoreloadEnabled {
+            autoReloadSwitch.isOn = auto
+        } else {
+            autoReloadSwitch.isOn = true
+        }
+        if let mail = settings.loginEmail {
+            mailTextField.text = mail
+        }
+        if let pswd = settings.loginPassword {
+            passwordTextField.text = pswd
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

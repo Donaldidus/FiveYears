@@ -153,13 +153,13 @@
                         <color key="backgroundColor" red="0.94117647059999998" green="0.38431372549999998" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="Verschiedenes" id="LeG-xW-73t">
+                            <tableViewSection id="LeG-xW-73t">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Dc7-el-boR">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Dc7-el-boR">
+                                        <rect key="frame" x="0.0" y="35" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dc7-el-boR" id="Gnv-dn-Ej5">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMQ-gE-6GM">
@@ -174,6 +174,9 @@
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfC-hT-pkC">
                                                             <rect key="frame" x="255" y="0.0" width="51" height="31"/>
                                                             <color key="onTintColor" red="0.91372549020000005" green="0.1176470588" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <connections>
+                                                                <action selector="rainSwitchChanged:" destination="PPU-F0-9tj" eventType="valueChanged" id="jTF-aG-hT4"/>
+                                                            </connections>
                                                         </switch>
                                                     </subviews>
                                                 </stackView>
@@ -188,11 +191,11 @@
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.4823529412" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qu2-SE-aji">
-                                        <rect key="frame" x="0.0" y="99.5" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="qu2-SE-aji">
+                                        <rect key="frame" x="0.0" y="79" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qu2-SE-aji" id="ke9-gt-t9x">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jFR-jf-2d1">
@@ -207,6 +210,9 @@
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6kL-FG-Mcv">
                                                             <rect key="frame" x="255" y="0.0" width="51" height="31"/>
                                                             <color key="onTintColor" red="0.91372549020000005" green="0.1176470588" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <connections>
+                                                                <action selector="autoReloadChanged:" destination="PPU-F0-9tj" eventType="valueChanged" id="TOG-ou-cQ9"/>
+                                                            </connections>
                                                         </switch>
                                                     </subviews>
                                                 </stackView>
@@ -225,8 +231,8 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Schriftgröße" id="cx5-ZI-PXO">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Xlm-gh-4Bo">
-                                        <rect key="frame" x="0.0" y="199.5" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Xlm-gh-4Bo">
+                                        <rect key="frame" x="0.0" y="179" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xlm-gh-4Bo" id="FXG-L8-gFy">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -248,6 +254,9 @@
                                                             <rect key="frame" x="48" y="0.0" width="258" height="32"/>
                                                             <color key="minimumTrackTintColor" red="0.91372549020000005" green="0.1176470588" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <connections>
+                                                                <action selector="fontSizeSliderChanged:" destination="PPU-F0-9tj" eventType="valueChanged" id="aOx-F8-vvE"/>
+                                                            </connections>
                                                         </slider>
                                                     </subviews>
                                                 </stackView>
@@ -260,6 +269,94 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.4823529412" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Login" id="SzB-Oc-tAB">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="ruK-bO-3Ap">
+                                        <rect key="frame" x="0.0" y="279" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ruK-bO-3Ap" id="RQW-IL-man">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1nO-6f-Z9o">
+                                                    <rect key="frame" x="8" y="6" width="304" height="31"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="mailTextFieldEndedEditing:" destination="PPU-F0-9tj" eventType="editingDidEnd" id="yxy-Ea-HPw"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1nO-6f-Z9o" firstAttribute="top" secondItem="RQW-IL-man" secondAttribute="top" constant="6" id="L7U-UF-IkH"/>
+                                                <constraint firstAttribute="bottom" secondItem="1nO-6f-Z9o" secondAttribute="bottom" constant="6.5" id="R2B-9W-Ayx"/>
+                                                <constraint firstItem="1nO-6f-Z9o" firstAttribute="leading" secondItem="RQW-IL-man" secondAttribute="leading" constant="8" id="YBo-w6-ibg"/>
+                                                <constraint firstAttribute="trailing" secondItem="1nO-6f-Z9o" secondAttribute="trailing" constant="8" id="yua-9b-FxW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.4823529412" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="MxM-vy-moX">
+                                        <rect key="frame" x="0.0" y="323" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MxM-vy-moX" id="XGV-ga-uk7">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Passwort" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1Dw-xW-U5z">
+                                                    <rect key="frame" x="8" y="6" width="304" height="31"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <action selector="passwordTextFieldEndedEditing:" destination="PPU-F0-9tj" eventType="editingDidEnd" id="4R2-ah-3Kh"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1Dw-xW-U5z" firstAttribute="leading" secondItem="XGV-ga-uk7" secondAttribute="leading" constant="8" id="AaP-34-a1K"/>
+                                                <constraint firstAttribute="bottom" secondItem="1Dw-xW-U5z" secondAttribute="bottom" constant="6.5" id="QdV-xb-e8h"/>
+                                                <constraint firstItem="1Dw-xW-U5z" firstAttribute="top" secondItem="XGV-ga-uk7" secondAttribute="top" constant="6" id="dis-6X-3pe"/>
+                                                <constraint firstAttribute="trailing" secondItem="1Dw-xW-U5z" secondAttribute="trailing" constant="8" id="jHn-wN-fRS"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.4823529412" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="JUN-4j-dTn">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="ziQ-Ey-C20">
+                                        <rect key="frame" x="0.0" y="403" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ziQ-Ey-C20" id="Pse-Mz-oV2">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWD-JZ-J1B">
+                                                    <rect key="frame" x="37.5" y="3" width="245" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <state key="normal" title="Einstellungen zurücksetzen">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="resetSettings:" destination="PPU-F0-9tj" eventType="touchUpInside" id="yWH-YQ-8mu"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LWD-JZ-J1B" firstAttribute="centerY" secondItem="Pse-Mz-oV2" secondAttribute="centerY" id="Eav-JA-vcW"/>
+                                                <constraint firstItem="LWD-JZ-J1B" firstAttribute="centerX" secondItem="Pse-Mz-oV2" secondAttribute="centerX" id="Oji-CU-g2N"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.4823529412" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -277,6 +374,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="autoReloadSwitch" destination="6kL-FG-Mcv" id="b41-8m-RbO"/>
+                        <outlet property="fontSizeLabel" destination="aLA-fQ-zGN" id="TWo-Jf-uis"/>
+                        <outlet property="fontSizeSlider" destination="gaY-HI-yUz" id="hqq-fF-5aC"/>
+                        <outlet property="mailTextField" destination="1nO-6f-Z9o" id="EPN-yC-Hav"/>
+                        <outlet property="passwordTextField" destination="1Dw-xW-U5z" id="zqq-Ub-Nh5"/>
+                        <outlet property="rainSwitch" destination="SfC-hT-pkC" id="jbw-ZD-7w4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6O-Y9-gax" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Pxm-Gm-qca" userLabel="Exit" sceneMemberID="exit"/>
@@ -303,11 +408,11 @@
             </objects>
             <point key="canvasLocation" x="135" y="138.38028169014083"/>
         </scene>
-        <!--Item-->
+        <!--Erinnerungen-->
         <scene sceneID="g65-NO-nhc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jVS-wu-uTh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="YSN-h6-sB2"/>
+                    <tabBarItem key="tabBarItem" title="Erinnerungen" id="YSN-h6-sB2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="R9v-Uh-V7d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -327,11 +432,11 @@
             </objects>
             <point key="canvasLocation" x="3956.25" y="137.32394366197184"/>
         </scene>
-        <!--Item-->
+        <!--Einstellungen-->
         <scene sceneID="a4e-uY-sFZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LYP-jG-xE6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="XW3-ob-rFh"/>
+                    <tabBarItem key="tabBarItem" title="Einstellungen" id="XW3-ob-rFh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3kD-NG-hWC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
