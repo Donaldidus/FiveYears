@@ -20,10 +20,13 @@ class MemoryViewController: UIViewController {
         didSet {
             if let imgs = images {
                 imageSlideShow.setImageInputs(imgs)
-                
-                // loveRain(pieces: 20)
             }
         }
+    }
+    
+    var userSettings: UserSettings {
+        let settings = UserDefaults.standard.getUserSettings()
+        return settings
     }
     
     @IBOutlet weak var reloadButton: UIBarButtonItem! {
@@ -79,7 +82,7 @@ class MemoryViewController: UIViewController {
         return txtvw
     }()
     
-    var rainRoses = false {
+    var rainRoses = true {
         didSet {
             if rainRoses {
                 rosePlateRain()
@@ -159,9 +162,19 @@ class MemoryViewController: UIViewController {
         
         newNotification()
         
-        rainRoses = true
+        if let auto = userSettings.autoreloadEnabled {
+            if auto {
+                reloadContent()
+            }
+        }
         
         segmentChanged(segmentCtrl)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        applyUserSettings()
     }
     
     /// Causes the imageSlideShow take over the entire screen.
@@ -292,18 +305,28 @@ class MemoryViewController: UIViewController {
     /// Signes the account given in the credentials into Firebase if possible.
     /// Shows an alert with the error message if the login fails.
     private func authenticateFirebase() {
-        FIRAuth.auth()?.signIn(withEmail: credentials.email, password: credentials.password) { (user, error) in
-            if error != nil {
-                print(error.debugDescription)
-                let message = error?.localizedDescription
-                let alert = UIAlertController(title: "Database Login Error", message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { (alert: UIAlertAction) in
-                    self.authenticateFirebase()
-                }))
-                self.present(alert, animated: true, completion: nil)
+        if let mail = userSettings.loginEmail, let psswd = userSettings.loginPassword {
+            FIRAuth.auth()?.signIn(withEmail: mail, password: psswd) { (user, error) in
+                if error != nil {
+                    print(error.debugDescription)
+                    let message = error?.localizedDescription
+                    let alert = UIAlertController(title: "Database Login Error", message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { (alert: UIAlertAction) in
+                        self.authenticateFirebase()
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
+        } else {
+            let alert = UIAlertController(title: "Login Information Missing", message: "Your credentials could not be found. Enter your mail and password in settings.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+            // Maybe ad showing settingsVC here
+            present(alert, animated: true, completion: nil)
         }
+        
+        
     }
     
     private func animateReloadButton() {
@@ -370,5 +393,15 @@ class MemoryViewController: UIViewController {
             }
         })
     }
+    
+    private func applyUserSettings() {
+        if let rain = userSettings.rainEnabled {
+            rainRoses = rain
+        }
+        if let size = userSettings.fontSize {
+            textView.font = UIFont(name: TEXT_FONT_NAME, size: CGFloat(size))
+        }
+    }
+    
 }
 

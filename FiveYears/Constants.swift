@@ -18,6 +18,8 @@ let HEART_BEAT_RESIZE: CGFloat = 0.9
 
 let TEXT_FONT = UIFont(name: "Baskerville", size: 21)
 
+let TEXT_FONT_NAME = "Baskerville"
+
 let TEXT_COLOR = UIColor.white // UIColor(hexString: "#333333")
 
 let TEXTVIEW_CONTAINER_INSETS = UIEdgeInsets(top: 15, left: 8, bottom: 10, right: 8)
