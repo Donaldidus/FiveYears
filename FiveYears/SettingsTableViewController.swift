@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var rainSwitch: UISwitch!
     
@@ -30,6 +30,9 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mailTextField.delegate = self
+        passwordTextField.delegate = self
         
         resetUIToSettings()
     }
@@ -74,6 +77,11 @@ class SettingsTableViewController: UITableViewController {
                 self.resetUIToSettings()
             }))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
     }
     
     private func resetUIToSettings() {
