@@ -14,6 +14,7 @@
 		3D337CE91EB51E9700CF62FD /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CE81EB51E9700CF62FD /* DataService.swift */; };
 		3D337CEB1EB527A100CF62FD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CEA1EB527A100CF62FD /* Credentials.swift */; };
 		3D93A26F1EBB529800536DA9 /* MemoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D93A26E1EBB529800536DA9 /* MemoryTableViewController.swift */; };
+		3DB760821EC37EBB00BA869B /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB760811EC37EBB00BA869B /* SettingsTableViewController.swift */; };
 		3DBAE2501EAA51F800AD136E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBAE24F1EAA51F800AD136E /* AppDelegate.swift */; };
 		3DBAE2521EAA51F800AD136E /* MemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBAE2511EAA51F800AD136E /* MemoryViewController.swift */; };
 		3DBAE2551EAA51F800AD136E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBAE2531EAA51F800AD136E /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		3D337CE81EB51E9700CF62FD /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		3D337CEA1EB527A100CF62FD /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		3D93A26E1EBB529800536DA9 /* MemoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewController.swift; sourceTree = "<group>"; };
+		3DB760811EC37EBB00BA869B /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		3DBAE24C1EAA51F800AD136E /* FiveYears.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveYears.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBAE24F1EAA51F800AD136E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DBAE2511EAA51F800AD136E /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				3D22059A1EB91C1000BBE9A2 /* testing.swift */,
 				3DBAE2661EAA5BF800AD136E /* Constants.swift */,
 				3DBAE2531EAA51F800AD136E /* Main.storyboard */,
+				3DB760811EC37EBB00BA869B /* SettingsTableViewController.swift */,
 				3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */,
 				3D2648FA1EACFA9A003B1FF6 /* HeartButton.swift */,
 				3DBAE2611EAA520700AD136E /* Supporting Files */,
@@ -259,6 +262,7 @@
 				3D337CE91EB51E9700CF62FD /* DataService.swift in Sources */,
 				3D337CEB1EB527A100CF62FD /* Credentials.swift in Sources */,
 				3D0576621EBB96AF00E8F3A7 /* MemoryTableViewCell.swift in Sources */,
+				3DB760821EC37EBB00BA869B /* SettingsTableViewController.swift in Sources */,
 				3D93A26F1EBB529800536DA9 /* MemoryTableViewController.swift in Sources */,
 				3DBAE2521EAA51F800AD136E /* MemoryViewController.swift in Sources */,
 				3DD3CAB91EBB98F8003D043A /* Extensions.swift in Sources */,
