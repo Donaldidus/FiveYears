@@ -82,7 +82,7 @@ class MemoryViewController: UIViewController {
     var rainRoses = false {
         didSet {
             if rainRoses {
-                loveRain()
+                rosePlateRain()
             } else {
                 if rainTimer != nil {
                     rainTimer!.invalidate()
@@ -178,7 +178,7 @@ class MemoryViewController: UIViewController {
         text = longTestText
     }
     
-    func loveRain() {
+    func rosePlateRain() {
         let image = UIImageView(image: randomRosePlate())
         
         let path = randomPath(rect: view.bounds)
@@ -198,7 +198,7 @@ class MemoryViewController: UIViewController {
         
         let timeTillNextDrop = drand48() * 3
         
-        rainTimer = Timer.scheduledTimer(timeInterval: timeTillNextDrop, target: self, selector: #selector(loveRain), userInfo: nil, repeats: false)
+        rainTimer = Timer.scheduledTimer(timeInterval: timeTillNextDrop, target: self, selector: #selector(rosePlateRain), userInfo: nil, repeats: false)
     }
     
     /// Creates a straight path from the top to the buttom of the given rectangle at a random x location.
@@ -319,7 +319,10 @@ class MemoryViewController: UIViewController {
     }
     
     private func newNotification() {
-        DataService.ds.REF_NOTIFICATIONS.queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
+        // Only fetch database entries that are available today (not entries for future usage)
+        let today = String(Int(Date().timeIntervalSince1970))
+        
+        DataService.ds.REF_NOTIFICATIONS.queryEnding(atValue: nil, childKey: today).queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
             // The first child is the latest database entry.
             let childSnap = snapshot.children.allObjects[0] as! FIRDataSnapshot
             if childSnap.hasChild(DataBaseNotificationKeys.dismissed) {
@@ -336,10 +339,12 @@ class MemoryViewController: UIViewController {
                                 
                                 notificationDispatchGroup.enter()
                                 imgREF.data(withMaxSize: 10 * 1024 * 1024, completion: { data, error in
-                                    if let img = UIImage(data: data!) {
-                                        image = img
-                                        notificationDispatchGroup.leave()
+                                    if error == nil {
+                                        if let img = UIImage(data: data!) {
+                                            image = img
+                                        }
                                     }
+                                    notificationDispatchGroup.leave()
                                 })
                             }
                         }
@@ -349,12 +354,15 @@ class MemoryViewController: UIViewController {
                             notificationDispatchGroup.leave()
                         }
                         notificationDispatchGroup.notify(queue: DispatchQueue.main, execute: {
+                            // Create a PopupDialog from the snapshot data
                             let popover = PopupDialog(title: nil, message: message, image: image)
                             let button = PopupDialogButton(title: "Weiter", action: nil)
                             popover.addButton(button)
                             
-                            // TODO: Set dismissed value on completion.
-                            self.present(popover, animated: true, completion: nil)
+                            // After displaying the notification is marked dismissed in the database
+                            self.present(popover, animated: true, completion: {
+                                DataService.ds.setNotificationAsSeen(timestamp: childSnap.key)
+                            })
                         })
                         
                     }

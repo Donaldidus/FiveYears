@@ -35,6 +35,10 @@ class DataService {
     var REF_NOTIFICATIONS: FIRDatabaseReference {
         return _REF_NOTIFICATIONS
     }
+    
+    func setNotificationAsSeen(timestamp: String) {
+        REF_NOTIFICATIONS.child(timestamp).child("dismissed").setValue(true)
+    }
 }
 
 struct DataBaseKeys {

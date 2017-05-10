@@ -22,7 +22,7 @@ let TEXT_COLOR = UIColor.white // UIColor(hexString: "#333333")
 
 let TEXTVIEW_CONTAINER_INSETS = UIEdgeInsets(top: 15, left: 8, bottom: 10, right: 8)
 
-let RELOAD_BUTTON_ANIMATION_COLOR = UIColor.red
+let RELOAD_BUTTON_ANIMATION_COLOR = UIColor.white
 
 // MARK: Storyboard Identifiers
 
