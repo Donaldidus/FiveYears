@@ -124,7 +124,7 @@
                             <outlet property="delegate" destination="gTV-XV-Uaw" id="Lm2-KT-fjW"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="rG4-mJ-bBs"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="heart_fetch_tabbar-25" id="rG4-mJ-bBs"/>
                     <navigationItem key="navigationItem" title="Erinnerungen" id="gCv-qi-KA9">
                         <barButtonItem key="leftBarButtonItem" title="Zurück" id="b1j-Kg-ZGD">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -165,7 +165,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMQ-gE-6GM">
                                                     <rect key="frame" x="8" y="6" width="304" height="31"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rosen Regen ☂️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yN6-aX-oUh">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rosen Regen  ☂️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yN6-aX-oUh">
                                                             <rect key="frame" x="0.0" y="0.0" width="255" height="31"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -201,7 +201,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jFR-jf-2d1">
                                                     <rect key="frame" x="8" y="6" width="304" height="31"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto-Reload 🔃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ews-My-Cgm">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Reload  🔃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ews-My-Cgm">
                                                             <rect key="frame" x="0.0" y="0.0" width="255" height="31"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -241,7 +241,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3cy-Cf-zh4">
                                                     <rect key="frame" x="8" y="6" width="304" height="31"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLA-fQ-zGN">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLA-fQ-zGN">
                                                             <rect key="frame" x="0.0" y="0.0" width="40" height="31"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="sAE-a5-DpP"/>
@@ -250,7 +250,7 @@
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="12" maxValue="24" translatesAutoresizingMaskIntoConstraints="NO" id="gaY-HI-yUz">
+                                                        <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="18" maxValue="25" translatesAutoresizingMaskIntoConstraints="NO" id="gaY-HI-yUz">
                                                             <rect key="frame" x="48" y="0.0" width="258" height="32"/>
                                                             <color key="minimumTrackTintColor" red="0.91372549020000005" green="0.1176470588" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -366,7 +366,7 @@
                             <outlet property="delegate" destination="PPU-F0-9tj" id="U8a-a6-RA0"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="azc-6w-sce"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="settings_tabbar-25" id="azc-6w-sce"/>
                     <navigationItem key="navigationItem" title="Einstellungen" id="Kip-iX-1wX">
                         <barButtonItem key="leftBarButtonItem" title="Zurück" id="ES0-bm-GU4">
                             <connections>
@@ -417,7 +417,7 @@
         <scene sceneID="g65-NO-nhc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jVS-wu-uTh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Erinnerungen" selectedImage="heart_fetch_tabbar-25" id="YSN-h6-sB2"/>
+                    <tabBarItem key="tabBarItem" title="Erinnerungen" image="heart_fetch_tabbar-25" selectedImage="heart_fetch_tabbar-25" id="YSN-h6-sB2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="R9v-Uh-V7d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -441,7 +441,7 @@
         <scene sceneID="a4e-uY-sFZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LYP-jG-xE6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Einstellungen" id="XW3-ob-rFh"/>
+                    <tabBarItem key="tabBarItem" title="Einstellungen" image="settings_tabbar-25" selectedImage="settings_tabbar-25" id="XW3-ob-rFh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3kD-NG-hWC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -487,5 +487,6 @@
         <image name="heart_fetch-40" width="40" height="40"/>
         <image name="heart_fetch_tabbar-25" width="25" height="25"/>
         <image name="heart_reload-40" width="40" height="40"/>
+        <image name="settings_tabbar-25" width="25" height="23"/>
     </resources>
 </document>

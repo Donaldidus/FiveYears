@@ -332,11 +332,15 @@ class MemoryViewController: UIViewController {
     private func animateReloadButton() {
         if loading {
             self.reloadButton.customView!.tintColor = RELOAD_BUTTON_ANIMATION_COLOR
+            let originalFrame = reloadButton.customView!.frame
             UIView.animate(withDuration: 1.0, delay: 0.0, options: [.autoreverse, .curveEaseIn, .repeat], animations: {
                 self.reloadButton.customView!.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                self.reloadButton.customView!.alpha = 0.7
                 
             }, completion: { (completed) in
                 self.reloadButton.customView!.tintColor = UIColor.white
+                self.reloadButton.customView!.alpha = 1.0
+                self.reloadButton.customView!.frame = originalFrame
             })
         }
     }
