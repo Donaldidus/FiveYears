@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3D0576621EBB96AF00E8F3A7 /* MemoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */; };
 		3D22059B1EB91C1000BBE9A2 /* testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D22059A1EB91C1000BBE9A2 /* testing.swift */; };
-		3D2648FB1EACFA9A003B1FF6 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2648FA1EACFA9A003B1FF6 /* HeartButton.swift */; };
 		3D337CE61EB11F9700CF62FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D337CE51EB11F9700CF62FD /* GoogleService-Info.plist */; };
 		3D337CE91EB51E9700CF62FD /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CE81EB51E9700CF62FD /* DataService.swift */; };
 		3D337CEB1EB527A100CF62FD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CEA1EB527A100CF62FD /* Credentials.swift */; };
@@ -30,7 +29,6 @@
 		25EC580C7CFFB1AB3830C94C /* Pods-FiveYears.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiveYears.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FiveYears/Pods-FiveYears.debug.xcconfig"; sourceTree = "<group>"; };
 		3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewCell.swift; sourceTree = "<group>"; };
 		3D22059A1EB91C1000BBE9A2 /* testing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testing.swift; sourceTree = "<group>"; };
-		3D2648FA1EACFA9A003B1FF6 /* HeartButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		3D337CE51EB11F9700CF62FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D337CE81EB51E9700CF62FD /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		3D337CEA1EB527A100CF62FD /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 				3DBAE2531EAA51F800AD136E /* Main.storyboard */,
 				3DB760811EC37EBB00BA869B /* SettingsTableViewController.swift */,
 				3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */,
-				3D2648FA1EACFA9A003B1FF6 /* HeartButton.swift */,
 				3DBAE2611EAA520700AD136E /* Supporting Files */,
 			);
 			path = FiveYears;
@@ -271,7 +268,6 @@
 				3DD3CAB91EBB98F8003D043A /* Extensions.swift in Sources */,
 				3DBAE2501EAA51F800AD136E /* AppDelegate.swift in Sources */,
 				3DB760841EC3888500BA869B /* UserSettings+UserDefaults.swift in Sources */,
-				3D2648FB1EACFA9A003B1FF6 /* HeartButton.swift in Sources */,
 				3D22059B1EB91C1000BBE9A2 /* testing.swift in Sources */,
 				3DBAE2671EAA5BF800AD136E /* Constants.swift in Sources */,
 			);
