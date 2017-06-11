@@ -36,7 +36,7 @@ struct StoryboardIdentifier {
     static let UnwindMemorySegue = "UnwindMemory"
 }
 
-
+// extension that will allow to create a UIColor from a hexString code
 extension UIColor {
     convenience init(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

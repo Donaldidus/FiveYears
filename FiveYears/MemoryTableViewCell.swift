@@ -8,8 +8,8 @@
 
 import UIKit
 
+/// A simple memory cell that displays the title of the memory and it's date
 class MemoryTableViewCell: UITableViewCell {
-
         
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -22,8 +22,6 @@ class MemoryTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

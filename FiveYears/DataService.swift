@@ -36,12 +36,16 @@ class DataService {
         return _REF_NOTIFICATIONS
     }
     
+    /// Set the notification to seen in the database.
+    ///
+    /// - Parameter timestamp: timestamp of the notification
     func setNotificationAsSeen(timestamp: String) {
         REF_NOTIFICATIONS.child(timestamp).child("dismissed").setValue(true)
     }
 }
 
-struct DataBaseKeys {
+// the keys to access the data in the firebase database
+struct DataBaseMemoryKeys {
     static let title = "title"
     static let text = "text"
     static let images = "images"

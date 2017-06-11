@@ -38,6 +38,7 @@ class MemoryTableViewController: UITableViewController {
     }
     
     
+    /// Indicates if the tableview is currently loading data from the web.
     private var loading = false {
         didSet {
             // check if bool value has changed
@@ -163,7 +164,7 @@ class MemoryTableViewController: UITableViewController {
         if let memoryCell = cell as? MemoryTableViewCell {
             if let memo = memories {
                 // query the firebase database for the title of the given memory
-                DataService.ds.REF_MEMORIES.child(memo[indexPath.row]).child(DataBaseKeys.title).observe(.value, with: { (snapshot) in
+                DataService.ds.REF_MEMORIES.child(memo[indexPath.row]).child(DataBaseMemoryKeys.title).observe(.value, with: { (snapshot) in
                     // set the text of the cell to the title received from database
                     memoryCell.titleLabel.text = snapshot.value as? String ?? "No title available."
                     // read timestamp from memories (default is 18. May 2012) and convert it to a readable date

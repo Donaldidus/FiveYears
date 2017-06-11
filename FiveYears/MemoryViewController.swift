@@ -270,9 +270,9 @@ class MemoryViewController: UIViewController {
     /// - Parameter snapshot: The snapshot the data is to be extracted from.
     private func extractData(from snapshot: FIRDataSnapshot) {
         
-        let text = snapshot.childSnapshot(forPath: DataBaseKeys.text).value as? String ?? "No text available."
+        let text = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.text).value as? String ?? "No text available."
         self.text = text
-        let images = snapshot.childSnapshot(forPath: DataBaseKeys.images).children
+        let images = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.images).children
         
         var imgSources = [ImageSource]()
         

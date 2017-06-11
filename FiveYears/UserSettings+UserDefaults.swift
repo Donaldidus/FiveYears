@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A struct with all available settings the user is able to change.
 struct UserSettings {
     
     var fontSize: Int?
@@ -22,6 +23,8 @@ struct UserSettings {
     
 }
 
+
+/// Struct defining the keys for every setting to access in UserDefaults.
 struct UserSettingsKeys {
     static let fontSize = "fontSize"
     static let rainEnabled = "rainEnabled"
@@ -30,6 +33,7 @@ struct UserSettingsKeys {
     static let loginPassword = "loginPassword"
 }
 
+// Extending UserDefaults to easily save, delete and get the user settings.
 extension UserDefaults {
     func save(usersettings settings: UserSettings) {
         if let size = settings.fontSize {
