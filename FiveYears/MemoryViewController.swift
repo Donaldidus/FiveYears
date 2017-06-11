@@ -13,7 +13,9 @@ import FirebaseDatabase
 import PopupDialog
 
 
-class MemoryViewController: UIViewController {
+class MemoryViewController: UIViewController, UITextViewDelegate {
+    
+    var lastOffsetY: CGFloat = 0
     
     /// The images that will be loaded into the imageSlideShow as an ImageSource.
     var images: [ImageSource]? {
@@ -71,7 +73,7 @@ class MemoryViewController: UIViewController {
     var imageSlideShow = ImageSlideshow()
     
     /// textView shows the text assigned in the text variable.
-    var textView: UITextView = {
+    lazy var textView: UITextView = {
         let txtvw = UITextView()
         txtvw.backgroundColor = BACKGROUND_COLOR
         txtvw.textColor = TEXT_COLOR
@@ -79,6 +81,7 @@ class MemoryViewController: UIViewController {
         txtvw.textAlignment = .justified
         txtvw.textContainerInset = TEXTVIEW_CONTAINER_INSETS
         txtvw.isEditable = false
+        txtvw.delegate = self
         return txtvw
     }()
     
@@ -154,6 +157,16 @@ class MemoryViewController: UIViewController {
         view.backgroundColor = BACKGROUND_COLOR
         contentView.backgroundColor = BACKGROUND_COLOR
         
+        // setup scrollview
+        let imageHeight = view.bounds.maxY / 3
+        
+        
+        imageSlideShow.frame = CGRect(x: contentView.bounds.minX, y: contentView.bounds.minY, width: contentView.bounds.maxX, height: imageHeight)
+        textView.frame = CGRect(x: contentView.bounds.minX, y: contentView.bounds.minY + imageHeight, width: contentView.bounds.maxX, height: contentView.bounds.maxY)
+        
+        contentView.addSubview(imageSlideShow)
+        contentView.addSubview(textView)
+        
         
         // TODO: REMOVE LATER
         insertTestContent()
@@ -168,13 +181,37 @@ class MemoryViewController: UIViewController {
             }
         }
         
-        segmentChanged(segmentCtrl)
+        // segmentChanged(segmentCtrl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         applyUserSettings()
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        lastOffsetY = scrollView.contentOffset.y
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollPosition = scrollView.contentOffset
+        // print(scrollPosition)
+        
+        // print(textView.frame.minY, imageSlideShow.frame.maxY)
+        
+        // imageSlideShow.frame = CGRect(x: imageSlideShow.frame.minX, y: imageSlideShow.frame.minY + scrollPosition.y, width: imageSlideShow.bounds.width, height: imageSlideShow.bounds.height)
+        // scroll up
+        if textView.frame.minY - scrollPosition.y >= contentView.bounds.minY && textView.frame.minY - scrollPosition.y <= imageSlideShow.frame.maxY {
+            textView.frame = CGRect(x: textView.frame.minX, y: max(textView.frame.minY - scrollPosition.y, contentView.bounds.minY), width: textView.bounds.width, height: textView.bounds.height)
+            scrollView.setContentOffset(CGPoint.zero, animated: false)
+        }
+        // scroll down
+        //else if textView.frame.minY - scrollPosition.y <= imageSlideShow.frame.maxY && scrollPosition.y > 0 {
+        //    textView.frame = CGRect(x: textView.frame.minX, y: min(textView.frame.minY - scrollPosition.y, imageSlideShow.frame.maxY), width: textView.bounds.width, height: textView.bounds.height)
+        //    scrollView.setContentOffset(CGPoint.zero, animated: false)
+        //}
+        
     }
     
     /// Causes the imageSlideShow take over the entire screen.
