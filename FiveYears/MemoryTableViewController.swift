@@ -69,6 +69,8 @@ class MemoryTableViewController: UITableViewController {
         // (I didn't find any way to set this in the Storyboard :O)
         if let navController = self.navigationController {
             navController.navigationBar.tintColor = UIColor.white
+            navController.navigationBar.backgroundColor = NAVIGATION_BAR_COLOR
+            navController.navigationBar.isTranslucent = true
         }
         
         self.refreshControl?.addTarget(self, action: #selector(fetchMemories), for: UIControlEvents.valueChanged)
