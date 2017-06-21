@@ -116,7 +116,7 @@ class MemoryTableViewController: UITableViewController {
         DataService.ds.REF_MEMORIES.queryEnding(atValue: nil, childKey: today).observe(.value, with: { (snapshot) in
             // The first child is the latest database entry.
             for child in snapshot.children.reversed() {
-                if let childSnap = child as? FIRDataSnapshot {
+                if let childSnap = child as? DataSnapshot {
                     self.memories?.append(childSnap.key)
                 }
             }

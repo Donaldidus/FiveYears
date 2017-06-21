@@ -12,9 +12,9 @@ import FirebaseDatabase
 import FirebaseStorage
 
 
-let DB_BASE = FIRDatabase.database().reference()
+let DB_BASE = Database.database().reference()
 
-let storage = FIRStorage.storage()
+let storage = Storage.storage()
 
 class DataService {
     
@@ -24,15 +24,15 @@ class DataService {
     private var _REF_MEMORIES = DB_BASE.child("memories")
     private var _REF_NOTIFICATIONS = DB_BASE.child("notifications")
     
-    var REF_BASE: FIRDatabaseReference {
+    var REF_BASE: DatabaseReference {
         return _REF_BASE
     }
     
-    var REF_MEMORIES: FIRDatabaseReference {
+    var REF_MEMORIES: DatabaseReference {
         return _REF_MEMORIES
     }
     
-    var REF_NOTIFICATIONS: FIRDatabaseReference {
+    var REF_NOTIFICATIONS: DatabaseReference {
         return _REF_NOTIFICATIONS
     }
     

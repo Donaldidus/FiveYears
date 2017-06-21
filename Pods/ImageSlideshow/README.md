@@ -21,14 +21,14 @@ ImageSlideshow is available through [CocoaPods](http://cocoapods.org). To instal
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'ImageSlideshow', '~> 1.2'
+pod 'ImageSlideshow', '~> 1.3'
 ```
 
 ### Carthage
 To integrate ImageSlideshow into your Xcode project using Carthage, specify it in your Cartfile:
 
 ```ruby
-github "zvonicek/ImageSlideshow" "1.2"
+github "zvonicek/ImageSlideshow" "1.3"
 ```
 
 Carthage does not include InputSources for external providers (due to dependency on those providers) so you need to grab the one you need from `ImageSlideshow/Classes/InputSources` manually.
@@ -74,7 +74,7 @@ slideshow.setImageInputs([
 
 Behaviour is configurable by those properties:
 
-- ```slideshowInterval``` - in case you want automatic slideshow, set up the interval between sliding to next picture (default `0` – disabled)
+- ```slideshowInterval``` - slideshow interval in seconds (default `0` – disabled)
 - ```zoomEnabled``` - enables zooming (default `false`)
 - ```circular``` - enables circular scrolling (default `true`)
 - ```pageControlPosition``` - configures position of UIPageControl (default `insideScrollView`, also `hidden`, `underScrollView` or `custom`)
@@ -84,6 +84,22 @@ Behaviour is configurable by those properties:
 - ```willBeginDragging``` - closure called on scrollViewWillBeginDragging
 - ```didEndDecelerating``` - closure called on scrollViewDidEndDecelerating
 - ```preload``` - image preloading configuration (default `all` preloading, also `fixed`)
+
+### Activity Indicator
+
+By default activity indicator is not shown, but you can enable it by setting `DefaultActivityIndicator` instance to Image Slideshow:
+
+```swift
+slideshow.activityIndicator = DefaultActivityIndicator()
+```
+
+You can customize style and color of the indicator:
+
+```swift
+slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+```
+
+There's also an option to use your own activity indicator. You just need to implement `ActivityIndicatorView` and `ActivityIndicatorFactory` protocols. See `ActivityIndicator.swift` for more information.
 
 ### Full Screen view
 

@@ -258,7 +258,7 @@ class MemoryViewController: UIViewController {
             
             DataService.ds.REF_MEMORIES.queryEnding(atValue: nil, childKey: today).queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
                 // The first child is the latest database entry.
-                let childSnap = snapshot.children.allObjects[0] as! FIRDataSnapshot
+                let childSnap = snapshot.children.allObjects[0] as! DataSnapshot
                 self.extractData(from: childSnap)
             })
         }
@@ -268,7 +268,7 @@ class MemoryViewController: UIViewController {
     /// This will also load the images from the web. Make sure to call this function only if it's necessary.
     ///
     /// - Parameter snapshot: The snapshot the data is to be extracted from.
-    private func extractData(from snapshot: FIRDataSnapshot) {
+    private func extractData(from snapshot: DataSnapshot) {
         
         let text = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.text).value as? String ?? "No text available."
         self.text = text
@@ -279,11 +279,11 @@ class MemoryViewController: UIViewController {
         let imageDownloadDispatchGroup = DispatchGroup()
         
         for image in images {
-            if let imgURL = (image as? FIRDataSnapshot)?.value as? String {
+            if let imgURL = (image as? DataSnapshot)?.value as? String {
                 let imgREF = storage.reference(forURL: imgURL)
                 loading = true
                 imageDownloadDispatchGroup.enter()
-                imgREF.data(withMaxSize: 10 * 1024 * 1024, completion: { data, error in
+                imgREF.getData(maxSize: 10 * 1024 * 1024, completion: { data, error in
                     if let error = error {
                         print(error.localizedDescription)
                     } else {
@@ -306,7 +306,7 @@ class MemoryViewController: UIViewController {
     /// Shows an alert with the error message if the login fails.
     private func authenticateFirebase() {
         if let mail = userSettings.loginEmail, let psswd = userSettings.loginPassword {
-            FIRAuth.auth()?.signIn(withEmail: mail, password: psswd) { (user, error) in
+            Auth.auth().signIn(withEmail: mail, password: psswd) { (user, error) in
                 if error != nil {
                     print(error.debugDescription)
                     let message = error?.localizedDescription
@@ -351,7 +351,7 @@ class MemoryViewController: UIViewController {
         
         DataService.ds.REF_NOTIFICATIONS.queryEnding(atValue: nil, childKey: today).queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
             // The first child is the latest database entry.
-            let childSnap = snapshot.children.allObjects[0] as! FIRDataSnapshot
+            let childSnap = snapshot.children.allObjects[0] as! DataSnapshot
             if childSnap.hasChild(DataBaseNotificationKeys.dismissed) {
                 if let dismissed = childSnap.childSnapshot(forPath: DataBaseNotificationKeys.dismissed).value as? Bool {
                     if !dismissed {
@@ -365,7 +365,7 @@ class MemoryViewController: UIViewController {
                                 let imgREF = storage.reference(forURL: imgURL)
                                 
                                 notificationDispatchGroup.enter()
-                                imgREF.data(withMaxSize: 10 * 1024 * 1024, completion: { data, error in
+                                imgREF.getData(maxSize: 10 * 1024 * 1024, completion: { data, error in
                                     if error == nil {
                                         if let img = UIImage(data: data!) {
                                             image = img
