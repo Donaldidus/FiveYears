@@ -12,6 +12,10 @@ import UIKit
 
 let BACKGROUND_COLOR = UIColor(hexString: "#F06292") // #87475d
 
+let IMAGE_BACKGROUND_COLOR = UIColor(hexString: "#f97ca7")
+
+let NAVIGATION_BAR_COLOR = UIColor(hexString: "E91E63")
+
 let HEART_COLOR = UIColor(hexString: "#cc0000")
 
 let HEART_BEAT_RESIZE: CGFloat = 0.9

@@ -13,7 +13,7 @@ import FirebaseDatabase
 import PopupDialog
 
 
-class MemoryViewController: UIViewController {
+class MemoryViewController: UIViewController, UITextViewDelegate {
     
     /// The images that will be loaded into the imageSlideShow as an ImageSource.
     var images: [ImageSource]? {
@@ -68,10 +68,14 @@ class MemoryViewController: UIViewController {
     
     
     /// imageSlideShow shows the images assigned in the images variable.
-    var imageSlideShow = ImageSlideshow()
+    var imageSlideShow: ImageSlideshow = {
+        let imageSlide = ImageSlideshow()
+        imageSlide.backgroundColor = IMAGE_BACKGROUND_COLOR
+        return imageSlide
+    }()
     
     /// textView shows the text assigned in the text variable.
-    var textView: UITextView = {
+    lazy var textView: UITextView = {
         let txtvw = UITextView()
         txtvw.backgroundColor = BACKGROUND_COLOR
         txtvw.textColor = TEXT_COLOR
@@ -79,6 +83,7 @@ class MemoryViewController: UIViewController {
         txtvw.textAlignment = .justified
         txtvw.textContainerInset = TEXTVIEW_CONTAINER_INSETS
         txtvw.isEditable = false
+        txtvw.delegate = self
         return txtvw
     }()
     
@@ -116,31 +121,6 @@ class MemoryViewController: UIViewController {
     /// The parent view of the textView and the imageSlideShow.
     @IBOutlet weak var contentView: UIView!
     
-    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        // Show Images selected
-        case 0:
-            // Remove all subviews first
-            contentView.subviews.forEach({ $0.removeFromSuperview() })
-            // Set frame for imageSlideShow to size of contentView
-            imageSlideShow.frame = contentView.bounds
-            // Add a GestureRecognizer to support tapping on the image and showing it fullscreen
-            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MemoryViewController.imgFullscreen))
-            imageSlideShow.addGestureRecognizer(gestureRecognizer)
-            // Add the slideshow to the contentView
-            contentView.addSubview(imageSlideShow)
-            
-        // Show Text selected
-        case 1:
-            // Remove all subviews first then add textView to contentView with right size
-            contentView.subviews.forEach({ $0.removeFromSuperview() })
-            textView.frame = contentView.bounds
-            contentView.addSubview(textView)
-        default:
-            break
-        }
-    }
-    
     @IBAction func goBack(segue: UIStoryboardSegue) {
         // Nothing happening here. See MemoryTableViewController's prepareforsegue.
     }
@@ -151,30 +131,49 @@ class MemoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = BACKGROUND_COLOR
+        // view.backgroundColor = BACKGROUND_COLOR
         contentView.backgroundColor = BACKGROUND_COLOR
         
+        // add the five logo to the navigationbar
+        let titleImage = UIImageView(image: #imageLiteral(resourceName: "five_logo-40"))
+        titleImage.contentMode = .scaleAspectFit
+        self.navigationItem.titleView = titleImage
         
-        // TODO: REMOVE LATER
-        insertTestContent()
+        // setup the contentView
+        setupContentView()
         
+        // insert default content until fully loaded
+        insertDefaultContent()
+        
+        // try to authenticate the firebase account
         authenticateFirebase()
         
-        newNotification()
-        
+        // if auto reload is enabled reload content
         if let auto = userSettings.autoreloadEnabled {
             if auto {
                 reloadContent()
             }
         }
-        
-        segmentChanged(segmentCtrl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        newNotification()
+        
         applyUserSettings()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollPosition = scrollView.contentOffset
+        
+        // scroll over image
+        if textView.frame.minY - scrollPosition.y >= contentView.bounds.minY && textView.frame.minY - scrollPosition.y <= imageSlideShow.frame.maxY {
+            textView.frame = CGRect(x: textView.frame.minX, y: max(textView.frame.minY - scrollPosition.y, contentView.bounds.minY), width: textView.bounds.width, height: textView.bounds.height)
+            imageSlideShow.alpha = textView.frame.minY / imageSlideShow.bounds.height
+            scrollView.setContentOffset(CGPoint.zero, animated: false)
+        }
+        
     }
     
     /// Causes the imageSlideShow take over the entire screen.
@@ -182,11 +181,11 @@ class MemoryViewController: UIViewController {
         imageSlideShow.presentFullScreenController(from: self)
     }
     
-    // TODO: REMOVE LATER
-    func insertTestContent() {
-        let image = #imageLiteral(resourceName: "Eva_Test")
+    /// inserts a default picture and text
+    private func insertDefaultContent() {
+        let image = #imageLiteral(resourceName: "default-image")
         
-        images = [ImageSource(image: image), ImageSource(image: image), ImageSource(image: image)]
+        images = [ImageSource(image: image)]
         
         text = longTestText
     }
@@ -212,6 +211,18 @@ class MemoryViewController: UIViewController {
         let timeTillNextDrop = drand48() * 3
         
         rainTimer = Timer.scheduledTimer(timeInterval: timeTillNextDrop, target: self, selector: #selector(rosePlateRain), userInfo: nil, repeats: false)
+    }
+    
+    private func setupContentView() {
+        let imageHeight = view.bounds.maxY / 3
+        
+        imageSlideShow.frame = CGRect(x: contentView.bounds.minX, y: contentView.bounds.minY, width: contentView.bounds.maxX, height: imageHeight)
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MemoryViewController.imgFullscreen))
+        imageSlideShow.addGestureRecognizer(gestureRecognizer)
+        textView.frame = CGRect(x: contentView.bounds.minX, y: contentView.bounds.minY + imageHeight, width: contentView.bounds.maxX, height: contentView.bounds.maxY)
+        
+        contentView.addSubview(imageSlideShow)
+        contentView.addSubview(textView)
     }
     
     /// Creates a straight path from the top to the buttom of the given rectangle at a random x location.
@@ -241,6 +252,9 @@ class MemoryViewController: UIViewController {
         }
     }
     
+    /// Will load the content for the given timestamp from firebase. If no timestamp is given the latest memory will be loaded.
+    ///
+    /// - Parameter timestamp: Timestamp of the memory that is to be loaded.
     private func reloadContent(forTimestamp timestamp: String? = nil) {
         // Reload content
         loading = true
