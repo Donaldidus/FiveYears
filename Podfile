@@ -12,5 +12,6 @@ target 'FiveYears' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
+  pod 'MXParallaxHeader'
 
 end

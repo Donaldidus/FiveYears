@@ -12,6 +12,7 @@
 		3D337CE61EB11F9700CF62FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D337CE51EB11F9700CF62FD /* GoogleService-Info.plist */; };
 		3D337CE91EB51E9700CF62FD /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CE81EB51E9700CF62FD /* DataService.swift */; };
 		3D337CEB1EB527A100CF62FD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CEA1EB527A100CF62FD /* Credentials.swift */; };
+		3D518FF31F1BD2070019DAB7 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D518FF21F1BD2070019DAB7 /* TextTableViewCell.swift */; };
 		3D93A26F1EBB529800536DA9 /* MemoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D93A26E1EBB529800536DA9 /* MemoryTableViewController.swift */; };
 		3DB760821EC37EBB00BA869B /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB760811EC37EBB00BA869B /* SettingsTableViewController.swift */; };
 		3DB760841EC3888500BA869B /* UserSettings+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB760831EC3888500BA869B /* UserSettings+UserDefaults.swift */; };
@@ -31,6 +32,7 @@
 		3D337CE51EB11F9700CF62FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D337CE81EB51E9700CF62FD /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		3D337CEA1EB527A100CF62FD /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		3D518FF21F1BD2070019DAB7 /* TextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		3D93A26E1EBB529800536DA9 /* MemoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewController.swift; sourceTree = "<group>"; };
 		3DB760811EC37EBB00BA869B /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		3DB760831EC3888500BA869B /* UserSettings+UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserSettings+UserDefaults.swift"; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				3DBAE2531EAA51F800AD136E /* Main.storyboard */,
 				3DB760811EC37EBB00BA869B /* SettingsTableViewController.swift */,
 				3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */,
+				3D518FF21F1BD2070019DAB7 /* TextTableViewCell.swift */,
 				3DBAE2611EAA520700AD136E /* Supporting Files */,
 			);
 			path = FiveYears;
@@ -260,6 +263,7 @@
 				3D337CEB1EB527A100CF62FD /* Credentials.swift in Sources */,
 				3D0576621EBB96AF00E8F3A7 /* MemoryTableViewCell.swift in Sources */,
 				3DB760821EC37EBB00BA869B /* SettingsTableViewController.swift in Sources */,
+				3D518FF31F1BD2070019DAB7 /* TextTableViewCell.swift in Sources */,
 				3D93A26F1EBB529800536DA9 /* MemoryTableViewController.swift in Sources */,
 				3DBAE2521EAA51F800AD136E /* MemoryViewController.swift in Sources */,
 				3DBAE2501EAA51F800AD136E /* AppDelegate.swift in Sources */,

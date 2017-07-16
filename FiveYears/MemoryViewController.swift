@@ -11,9 +11,10 @@ import ImageSlideshow
 import FirebaseAuth
 import FirebaseDatabase
 import PopupDialog
+import MXParallaxHeader
 
 
-class MemoryViewController: UIViewController, UITextViewDelegate {
+class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     /// The images that will be loaded into the imageSlideShow as an ImageSource.
     var images: [ImageSource]? {
@@ -23,6 +24,9 @@ class MemoryViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
+    
+    var scrollView: MXScrollView!
+    var tableView: UITableView!
     
     var userSettings: UserSettings {
         let settings = UserDefaults.standard.getUserSettings()
@@ -47,6 +51,7 @@ class MemoryViewController: UIViewController, UITextViewDelegate {
         didSet {
             if let memoryText = text {
                 textView.text = memoryText
+                tableView.reloadData()
             }
         }
     }
@@ -83,7 +88,6 @@ class MemoryViewController: UIViewController, UITextViewDelegate {
         txtvw.textAlignment = .justified
         txtvw.textContainerInset = TEXTVIEW_CONTAINER_INSETS
         txtvw.isEditable = false
-        txtvw.delegate = self
         return txtvw
     }()
     
@@ -117,10 +121,6 @@ class MemoryViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    
-    /// The parent view of the textView and the imageSlideShow.
-    @IBOutlet weak var contentView: UIView!
-    
     @IBAction func goBack(segue: UIStoryboardSegue) {
         // Nothing happening here. See MemoryTableViewController's prepareforsegue.
     }
@@ -131,8 +131,6 @@ class MemoryViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // view.backgroundColor = BACKGROUND_COLOR
-        contentView.backgroundColor = BACKGROUND_COLOR
         
         // add the five logo to the navigationbar
         let titleImage = UIImageView(image: #imageLiteral(resourceName: "five_logo-40"))
@@ -140,7 +138,7 @@ class MemoryViewController: UIViewController, UITextViewDelegate {
         self.navigationItem.titleView = titleImage
         
         // setup the contentView
-        setupContentView()
+        setupViews()
         
         // insert default content until fully loaded
         insertDefaultContent()
@@ -156,6 +154,19 @@ class MemoryViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        var frame = view.frame
+        
+        scrollView.frame = frame
+        scrollView.contentSize = frame.size
+        
+        frame.size.height -= scrollView.parallaxHeader.minimumHeight
+        
+        tableView.frame = frame
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -164,21 +175,24 @@ class MemoryViewController: UIViewController, UITextViewDelegate {
         applyUserSettings()
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let scrollPosition = scrollView.contentOffset
-        
-        // scroll over image
-        if textView.frame.minY - scrollPosition.y >= contentView.bounds.minY && textView.frame.minY - scrollPosition.y <= imageSlideShow.frame.maxY {
-            textView.frame = CGRect(x: textView.frame.minX, y: max(textView.frame.minY - scrollPosition.y, contentView.bounds.minY), width: textView.bounds.width, height: textView.bounds.height)
-            imageSlideShow.alpha = textView.frame.minY / imageSlideShow.bounds.height
-            scrollView.setContentOffset(CGPoint.zero, animated: false)
-        }
-        
-    }
-    
     /// Causes the imageSlideShow take over the entire screen.
     func imgFullscreen() {
         imageSlideShow.presentFullScreenController(from: self)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: StoryboardIdentifier.textViewCell, for: indexPath) as! TextTableViewCell
+        cell.backgroundColor = .blue
+        if let txt = text {
+            cell.textView.text = txt
+        } else {
+            cell.textView.text = "Error loading memory text."
+        }
+        return cell
     }
     
     /// inserts a default picture and text
@@ -213,16 +227,31 @@ class MemoryViewController: UIViewController, UITextViewDelegate {
         rainTimer = Timer.scheduledTimer(timeInterval: timeTillNextDrop, target: self, selector: #selector(rosePlateRain), userInfo: nil, repeats: false)
     }
     
-    private func setupContentView() {
-        let imageHeight = view.bounds.maxY / 3
+    private func setupViews() {
+        scrollView = MXScrollView()
+        tableView = UITableView()
         
-        imageSlideShow.frame = CGRect(x: contentView.bounds.minX, y: contentView.bounds.minY, width: contentView.bounds.maxX, height: imageHeight)
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MemoryViewController.imgFullscreen))
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.alwaysBounceVertical = true
+        
+        imageSlideShow.contentScaleMode = .scaleAspectFill
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.imgFullscreen))
         imageSlideShow.addGestureRecognizer(gestureRecognizer)
-        textView.frame = CGRect(x: contentView.bounds.minX, y: contentView.bounds.minY + imageHeight, width: contentView.bounds.maxX, height: contentView.bounds.maxY)
         
-        contentView.addSubview(imageSlideShow)
-        contentView.addSubview(textView)
+        scrollView.parallaxHeader.view = imageSlideShow
+        scrollView.parallaxHeader.height = view.frame.height / 1.5
+        scrollView.parallaxHeader.mode = MXParallaxHeaderMode.fill
+        scrollView.parallaxHeader.minimumHeight = 0
+        
+        view.addSubview(scrollView)
+        
+        tableView.register(TextTableViewCell.self, forCellReuseIdentifier: StoryboardIdentifier.textViewCell)
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
+        
+        scrollView.addSubview(tableView)
     }
     
     /// Creates a straight path from the top to the buttom of the given rectangle at a random x location.

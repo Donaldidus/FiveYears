@@ -21,19 +21,7 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lse-lb-JxR">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="Lse-lb-JxR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="KLU-xd-eyJ"/>
-                            <constraint firstAttribute="trailing" secondItem="Lse-lb-JxR" secondAttribute="trailing" id="Ng1-8G-7r9"/>
-                            <constraint firstItem="Lse-lb-JxR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cwg-Jt-Pi2"/>
-                            <constraint firstItem="Lse-lb-JxR" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="q1o-kZ-bH8"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vjc-Xx-hRO">
                         <barButtonItem key="leftBarButtonItem" image="heart_fetch-40" id="66s-LE-daJ">
@@ -47,7 +35,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="contentView" destination="Lse-lb-JxR" id="ozm-wU-b8i"/>
                         <outlet property="reloadButton" destination="HsT-Nl-Txc" id="DNi-8z-Co5"/>
                     </connections>
                 </viewController>

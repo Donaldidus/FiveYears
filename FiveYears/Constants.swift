@@ -38,6 +38,8 @@ struct StoryboardIdentifier {
     
     static let UnwindCancelSegue = "UnwindCancel"
     static let UnwindMemorySegue = "UnwindMemory"
+    
+    static let textViewCell = "textViewCell"
 }
 
 // extension that will allow to create a UIColor from a hexString code
