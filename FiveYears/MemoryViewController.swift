@@ -46,13 +46,10 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    /// The text displayed in the textView.
+    /// The text displayed in the textView cell.
     var text: String? {
         didSet {
-            if let memoryText = text {
-                textView.text = memoryText
-                tableView.reloadData()
-            }
+            tableView.reloadData()
         }
     }
     
@@ -79,18 +76,6 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return imageSlide
     }()
     
-    /// textView shows the text assigned in the text variable.
-    lazy var textView: UITextView = {
-        let txtvw = UITextView()
-        txtvw.backgroundColor = BACKGROUND_COLOR
-        txtvw.textColor = TEXT_COLOR
-        txtvw.font = TEXT_FONT
-        txtvw.textAlignment = .justified
-        txtvw.textContainerInset = TEXTVIEW_CONTAINER_INSETS
-        txtvw.isEditable = false
-        return txtvw
-    }()
-    
     var rainRoses = true {
         didSet {
             if rainRoses {
@@ -106,6 +91,7 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var rainTimer: Timer? = nil
     
+    /// indicates if the VC is currently loading data from the network
     private var loading = false {
         didSet {
             // check if bool value has changed
@@ -154,6 +140,7 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    /// Do some setup for the parallax Header
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -170,8 +157,10 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // check database for a new notfication
         newNotification()
         
+        // apply user settings: start rose rain if activated etc.
         applyUserSettings()
     }
     
@@ -368,7 +357,6 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // Maybe ad showing settingsVC here
             present(alert, animated: true, completion: nil)
         }
-        
         
     }
     
