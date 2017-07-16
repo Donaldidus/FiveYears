@@ -162,6 +162,8 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // apply user settings: start rose rain if activated etc.
         applyUserSettings()
+        
+        tableView.reloadData()
     }
     
     /// Causes the imageSlideShow take over the entire screen.
@@ -176,6 +178,9 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StoryboardIdentifier.textViewCell, for: indexPath) as! TextTableViewCell
         cell.backgroundColor = .blue
+        if let size = userSettings.fontSize {
+            cell.textView.font = UIFont(name: TEXT_FONT_NAME, size: CGFloat(size))
+        }
         if let txt = text {
             cell.textView.text = txt
         } else {
@@ -432,9 +437,6 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
     private func applyUserSettings() {
         if let rain = userSettings.rainEnabled {
             rainRoses = rain
-        }
-        if let size = userSettings.fontSize {
-            textView.font = UIFont(name: TEXT_FONT_NAME, size: CGFloat(size))
         }
     }
     
