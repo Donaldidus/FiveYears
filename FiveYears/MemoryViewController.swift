@@ -228,6 +228,7 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.alwaysBounceVertical = true
+        tableView.showsVerticalScrollIndicator = false
         
         imageSlideShow.contentScaleMode = .scaleAspectFill
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.imgFullscreen))
