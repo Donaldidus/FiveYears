@@ -30,6 +30,12 @@ let TEXTVIEW_CONTAINER_INSETS = UIEdgeInsets(top: 15, left: 8, bottom: 10, right
 
 let RELOAD_BUTTON_ANIMATION_COLOR = UIColor.white
 
+// how much of the main MemoryVC's content is allocated to the slideshow 0.7 = 70% of the view's height
+let SLIDESHOW_TEXT_RATIO: CGFloat = 0.7
+
+// how strong the bending of bottom of the header layer mask is in % of the header's height
+let HEADER_LAYER_CURVE_BENDING: CGFloat = 0.05
+
 // MARK: Storyboard Identifiers
 
 struct StoryboardIdentifier {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vF4-MT-QVn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vF4-MT-QVn">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,7 +21,19 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOl-DY-bBY">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="eOl-DY-bBY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="TH0-j2-bDw"/>
+                            <constraint firstItem="eOl-DY-bBY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="i1Q-yK-p9u"/>
+                            <constraint firstAttribute="trailing" secondItem="eOl-DY-bBY" secondAttribute="trailing" id="pMn-ra-511"/>
+                            <constraint firstItem="eOl-DY-bBY" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="v8x-51-1Nv"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vjc-Xx-hRO">
                         <barButtonItem key="leftBarButtonItem" image="heart_fetch-40" id="66s-LE-daJ">
@@ -35,6 +47,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="contentView" destination="eOl-DY-bBY" id="4N5-H4-WwU"/>
                         <outlet property="reloadButton" destination="HsT-Nl-Txc" id="DNi-8z-Co5"/>
                     </connections>
                 </viewController>
