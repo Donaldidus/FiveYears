@@ -115,9 +115,6 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // automaticallyAdjustsScrollViewInsets = true
-        navigationController?.navigationBar.isTranslucent = true
-        
         // add the five logo to the navigationbar
         let titleImage = UIImageView(image: #imageLiteral(resourceName: "five_logo-40"))
         titleImage.contentMode = .scaleAspectFit
@@ -207,6 +204,7 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
         rainTimer = Timer.scheduledTimer(timeInterval: timeTillNextDrop, target: self, selector: #selector(rosePlateRain), userInfo: nil, repeats: false)
     }
     
+    /// setup the TableView, add the ImageSlideShow and add it to the view
     private func setupViews() {
         tableView = ParallaxHeaderTableView(frame: contentView.frame)
         

@@ -22,6 +22,7 @@ class ParallaxHeaderTableView: UITableView, UITableViewDelegate {
         updateHeaderView()
     }
     
+    /// Setup table view and header view.
     private func setupViews() {
         delegate = self
         alwaysBounceVertical = true
@@ -46,6 +47,7 @@ class ParallaxHeaderTableView: UITableView, UITableViewDelegate {
         updateHeaderView()
     }
     
+    /// Adjust upon scrolling.
     private func updateHeaderView() {
         let headerHeight = bounds.height * SLIDESHOW_TEXT_RATIO
         var headerFrame = CGRect(x: 0, y: 0, width: bounds.width, height: headerHeight)
@@ -60,10 +62,16 @@ class ParallaxHeaderTableView: UITableView, UITableViewDelegate {
         let leftCtrlPoint = CGPoint(x: parallaxHeaderView.frame.width / 5, y: parallaxHeaderView.frame.height)
         let rightCtrlPoint = CGPoint(x: parallaxHeaderView.frame.width * 4 / 5, y: parallaxHeaderView.frame.height)
 
-        headerLayer.path = getHeaderPath(leftControlPoint: leftCtrlPoint, rightControlPoint: rightCtrlPoint).cgPath
+        headerLayer.path = getHeaderShapePath(leftControlPoint: leftCtrlPoint, rightControlPoint: rightCtrlPoint).cgPath
     }
     
-    private func getHeaderPath(leftControlPoint: CGPoint, rightControlPoint: CGPoint) -> UIBezierPath {
+    /// Returns the path for the header layer.
+    ///
+    /// - Parameters:
+    ///   - leftControlPoint: left point determining how the curve at the bottom is bend
+    ///   - rightControlPoint: right point determining how the curve at the bottom is bend
+    /// - Returns: UIBezierPath for the headerLayer.
+    private func getHeaderShapePath(leftControlPoint: CGPoint, rightControlPoint: CGPoint) -> UIBezierPath {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0))
         let inbound = parallaxHeaderView.frame.height * HEADER_LAYER_CURVE_BENDING
