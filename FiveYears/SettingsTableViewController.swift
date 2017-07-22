@@ -102,8 +102,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate {
     private func resetUIToSettings() {
         if let size = settings.fontSize {
             fontSizeSlider.value = Float(size)
+            fontSizeLabel.text = String(size)
         } else {
             fontSizeSlider.value = 17.0
+            fontSizeLabel.text = "17"
         }
         if let rain = settings.rainEnabled {
             rainSwitch.isOn = rain
