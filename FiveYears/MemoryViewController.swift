@@ -11,10 +11,8 @@ import ImageSlideshow
 import FirebaseAuth
 import FirebaseDatabase
 import PopupDialog
-import MXParallaxHeader
 
-
-class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MemoryViewController: UIViewController, UITableViewDataSource {
     
     /// The images that will be loaded into the imageSlideShow as an ImageSource.
     var images: [ImageSource]? {
@@ -26,8 +24,7 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBOutlet weak var contentView: UIView!
-    var tableView: UITableView!
-    var headerLayer: CAShapeLayer!
+    var tableView: ParallaxHeaderTableView!
     
     var userSettings: UserSettings {
         let settings = UserDefaults.standard.getUserSettings()
@@ -155,10 +152,6 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.reloadData()
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        updateHeaderView()
-    }
-    
     /// Causes the imageSlideShow take over the entire screen.
     func imgFullscreen() {
         imageSlideShow.presentFullScreenController(from: self)
@@ -215,65 +208,20 @@ class MemoryViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     private func setupViews() {
-        // let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        tableView = UITableView(frame: contentView.frame)
+        tableView = ParallaxHeaderTableView(frame: contentView.frame)
         
-        tableView.delegate = self
         tableView.dataSource = self
-        tableView.alwaysBounceVertical = true
-        tableView.showsVerticalScrollIndicator = false
-        tableView.backgroundColor = BACKGROUND_COLOR
         
         imageSlideShow.contentScaleMode = .scaleAspectFill
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.imgFullscreen))
         imageSlideShow.addGestureRecognizer(gestureRecognizer)
         
-        headerLayer = CAShapeLayer()
-        headerLayer.fillColor = UIColor.black.cgColor
-        imageSlideShow.layer.mask = headerLayer
-        
         tableView.tableHeaderView = nil
-        tableView.addSubview(imageSlideShow)
+        tableView.parallaxHeaderView = imageSlideShow
         
         tableView.register(TextTableViewCell.self, forCellReuseIdentifier: StoryboardIdentifier.textViewCell)
         
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 50
-        
-        let insetHeight = tableView.bounds.height * SLIDESHOW_TEXT_RATIO
-        tableView.contentInset = UIEdgeInsets(top: insetHeight, left: 0, bottom: 0, right: 0)
-        tableView.contentOffset = CGPoint(x: 0, y: -insetHeight)
-        
-        updateHeaderView()
-        
         view.addSubview(tableView)
-    }
-    
-    private func updateHeaderView() {
-        let headerHeight = tableView.bounds.height * SLIDESHOW_TEXT_RATIO
-        var headerFrame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: headerHeight)
-        
-        if tableView.contentOffset.y < headerHeight {
-            headerFrame.origin.y = tableView.contentOffset.y
-            headerFrame.size.height = -tableView.contentOffset.y
-        }
-        
-        imageSlideShow.frame = headerFrame
-        
-        headerLayer.path = getHeaderPath().cgPath
-    }
-    
-    private func getHeaderPath() -> UIBezierPath {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        let inbound = imageSlideShow.frame.height * HEADER_LAYER_CURVE_BENDING
-        path.addLine(to: CGPoint(x: imageSlideShow.frame.width, y: 0))
-        path.addLine(to: CGPoint(x: imageSlideShow.frame.width, y: imageSlideShow.frame.height - inbound))
-        let ctrlPoint1 = CGPoint(x: imageSlideShow.frame.width / 5, y: imageSlideShow.frame.height)
-        let ctrlPoint2 = CGPoint(x: imageSlideShow.frame.width * 4 / 5, y: imageSlideShow.frame.height)
-        path.addCurve(to: CGPoint(x: 0, y: imageSlideShow.frame.height - inbound), controlPoint1: ctrlPoint2, controlPoint2: ctrlPoint1)
-        
-        return path
     }
     
     /// Creates a straight path from the top to the buttom of the given rectangle at a random x location.

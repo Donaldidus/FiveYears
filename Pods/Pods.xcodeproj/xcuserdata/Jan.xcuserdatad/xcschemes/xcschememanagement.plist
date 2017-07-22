@@ -24,11 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MXParallaxHeader.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-FiveYears.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,27 +42,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>150494C1FE756838D68926FC400D4021</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CE128893E9804BAEDE7AB50D73BC82AF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E75E5BAC0FE6E4C6A5E5F95EA6807F8A</key>
+		<key>EADFCBE4E9E0CC3BDECEE1193D1C4FA6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>F78C1CFB1095A35CB73CA669ECFFCE66</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F80FACF36BB94BA7592951866D4D5B45</key>
 		<dict>
 			<key>primary</key>
 			<true/>
