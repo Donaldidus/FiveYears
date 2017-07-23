@@ -11,6 +11,7 @@
 		3D337CE61EB11F9700CF62FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D337CE51EB11F9700CF62FD /* GoogleService-Info.plist */; };
 		3D337CE91EB51E9700CF62FD /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CE81EB51E9700CF62FD /* DataService.swift */; };
 		3D337CEB1EB527A100CF62FD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CEA1EB527A100CF62FD /* Credentials.swift */; };
+		3D483C711F24E99E005A9BB8 /* DatabaseModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D483C6F1F24E99E005A9BB8 /* DatabaseModel.xcdatamodeld */; };
 		3D518FF31F1BD2070019DAB7 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D518FF21F1BD2070019DAB7 /* TextTableViewCell.swift */; };
 		3D93A26F1EBB529800536DA9 /* MemoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D93A26E1EBB529800536DA9 /* MemoryTableViewController.swift */; };
 		3D9AECC11F23ED36001A7A76 /* ParallaxHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9AECC01F23ED36001A7A76 /* ParallaxHeaderTableView.swift */; };
@@ -32,6 +33,7 @@
 		3D337CE51EB11F9700CF62FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D337CE81EB51E9700CF62FD /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		3D337CEA1EB527A100CF62FD /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		3D483C701F24E99E005A9BB8 /* DatabaseModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DatabaseModel.xcdatamodel; sourceTree = "<group>"; };
 		3D518FF21F1BD2070019DAB7 /* TextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		3D93A26E1EBB529800536DA9 /* MemoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewController.swift; sourceTree = "<group>"; };
 		3D9AECC01F23ED36001A7A76 /* ParallaxHeaderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxHeaderTableView.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				3D337CE71EB51E5600CF62FD /* Services */,
 				3DBAE2511EAA51F800AD136E /* MemoryViewController.swift */,
+				3D483C6F1F24E99E005A9BB8 /* DatabaseModel.xcdatamodeld */,
 				3D9AECC01F23ED36001A7A76 /* ParallaxHeaderTableView.swift */,
 				3D93A26E1EBB529800536DA9 /* MemoryTableViewController.swift */,
 				3DBAE2661EAA5BF800AD136E /* Constants.swift */,
@@ -274,6 +277,7 @@
 				3DBAE2501EAA51F800AD136E /* AppDelegate.swift in Sources */,
 				3DB760841EC3888500BA869B /* UserSettings+UserDefaults.swift in Sources */,
 				3DBAE2671EAA5BF800AD136E /* Constants.swift in Sources */,
+				3D483C711F24E99E005A9BB8 /* DatabaseModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +448,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3D483C6F1F24E99E005A9BB8 /* DatabaseModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3D483C701F24E99E005A9BB8 /* DatabaseModel.xcdatamodel */,
+			);
+			currentVersion = 3D483C701F24E99E005A9BB8 /* DatabaseModel.xcdatamodel */;
+			path = DatabaseModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3DBAE2441EAA51F800AD136E /* Project object */;
 }
