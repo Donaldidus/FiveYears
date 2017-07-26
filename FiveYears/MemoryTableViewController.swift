@@ -115,7 +115,8 @@ class MemoryTableViewController: UITableViewController {
         let today = String(Int(Date().timeIntervalSince1970))
         
         // run the firebase query for all memories in the past (ignore future memories)
-        DataService.ds.REF_MEMORIES.queryEnding(atValue: nil, childKey: today).observe(.value, with: { (snapshot) in
+        let ds = DataService()
+        ds.REF_MEMORIES.queryEnding(atValue: nil, childKey: today).observe(.value, with: { (snapshot) in
             // The first child is the latest database entry.
             for child in snapshot.children.reversed() {
                 if let childSnap = child as? DataSnapshot {
@@ -166,7 +167,8 @@ class MemoryTableViewController: UITableViewController {
         if let memoryCell = cell as? MemoryTableViewCell {
             if let memo = memories {
                 // query the firebase database for the title of the given memory
-                DataService.ds.REF_MEMORIES.child(memo[indexPath.row]).child(DataBaseMemoryKeys.title).observe(.value, with: { (snapshot) in
+                let ds = DataService()
+                ds.REF_MEMORIES.child(memo[indexPath.row]).child(DataBaseMemoryKeys.title).observe(.value, with: { (snapshot) in
                     // set the text of the cell to the title received from database
                     memoryCell.titleLabel.text = snapshot.value as? String ?? "No title available."
                     // read timestamp from memories (default is 18. May 2012) and convert it to a readable date

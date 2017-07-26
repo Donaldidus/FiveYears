@@ -23,6 +23,8 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
         }
     }
     
+    let database = DataBaseAccess()
+    
     @IBOutlet weak var contentView: UIView!
     var tableView: ParallaxHeaderTableView!
     
@@ -256,52 +258,42 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
         // Reload content
         loading = true
         if let key = timestamp {
-            // Get the database entry for the given timestamp.
-            DataService.ds.REF_MEMORIES.child(key).observe(.value, with: { (snapshot) in
-                // Extract data from the database snapshot.
-                self.extractData(from: snapshot)
+            database.memory(for: key, completionHandler: {[weak self] memory in
+                self?.extract(memory: memory)
             })
-        } else {
-            // Get the latest database entry.
             
-            // get the current date and remove decimal (firebase won't accept floating point)
-            let today = String(Int(Date().timeIntervalSince1970))
-            
-            DataService.ds.REF_MEMORIES.queryEnding(atValue: nil, childKey: today).queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
-                // The first child is the latest database entry.
-                let childSnap = snapshot.children.allObjects[0] as! DataSnapshot
-                self.extractData(from: childSnap)
-            })
+//            // Get the database entry for the given timestamp.
+//            DataService.ds.REF_MEMORIES.child(key).observe(.value, with: { (snapshot) in
+//                // Extract data from the database snapshot.
+//                self.extractData(from: snapshot)
+//            })
+//        } else {
+//            // Get the latest database entry.
+//            
+//            // get the current date and remove decimal (firebase won't accept floating point)
+//            let today = String(Int(Date().timeIntervalSince1970))
+//            
+//            DataService.ds.REF_MEMORIES.queryEnding(atValue: nil, childKey: today).queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
+//                // The first child is the latest database entry.
+//                let childSnap = snapshot.children.allObjects[0] as! DataSnapshot
+//                self.extractData(from: childSnap)
+//            })
+//        }
         }
     }
     
-    /// Extracts the data from a given Firebase Snapshot and assigns it to the text and images property.
-    /// This will also load the images from the web. Make sure to call this function only if it's necessary.
-    ///
-    /// - Parameter snapshot: The snapshot the data is to be extracted from.
-    private func extractData(from snapshot: DataSnapshot) {
-        
-        let text = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.text).value as? String ?? "No text available."
-        self.text = text
-        let images = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.images).children
+    private func extract(memory: Memory) {
+        self.text = memory.text
         
         var imgSources = [ImageSource]()
         
         let imageDownloadDispatchGroup = DispatchGroup()
         
-        for image in images {
-            if let imgURL = (image as? DataSnapshot)?.value as? String {
-                let imgREF = storage.reference(forURL: imgURL)
-                loading = true
+        for image in memory.images! {
+            if let image = image as? Image {
                 imageDownloadDispatchGroup.enter()
-                imgREF.getData(maxSize: 10 * 1024 * 1024, completion: { data, error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        if let img = UIImage(data: data!) {
-                            imgSources.append(ImageSource(image: img))
-                        }
-                    }
+                try! database.image(named: image.fileName!, from: image.webURL!, completionHandler: { uiimage in
+                    imgSources.append(ImageSource(image: uiimage))
                     imageDownloadDispatchGroup.leave()
                 })
             }
@@ -312,6 +304,44 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
             self.loading = false
         })
     }
+    
+//    /// Extracts the data from a given Firebase Snapshot and assigns it to the text and images property.
+//    /// This will also load the images from the web. Make sure to call this function only if it's necessary.
+//    ///
+//    /// - Parameter snapshot: The snapshot the data is to be extracted from.
+//    private func extractData(from snapshot: DataSnapshot) {
+//        
+//        let text = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.text).value as? String ?? "No text available."
+//        self.text = text
+//        let images = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.images).children
+//        
+//        var imgSources = [ImageSource]()
+//        
+//        let imageDownloadDispatchGroup = DispatchGroup()
+//        
+//        for image in images {
+//            if let imgURL = (image as? DataSnapshot)?.value as? String {
+//                let imgREF = storage.reference(forURL: imgURL)
+//                loading = true
+//                imageDownloadDispatchGroup.enter()
+//                imgREF.getData(maxSize: 10 * 1024 * 1024, completion: { data, error in
+//                    if let error = error {
+//                        print(error.localizedDescription)
+//                    } else {
+//                        if let img = UIImage(data: data!) {
+//                            imgSources.append(ImageSource(image: img))
+//                        }
+//                    }
+//                    imageDownloadDispatchGroup.leave()
+//                })
+//            }
+//        }
+//        
+//        imageDownloadDispatchGroup.notify(queue: DispatchQueue.main, execute: {
+//            self.images = imgSources
+//            self.loading = false
+//        })
+//    }
     
     /// Signes the account given in the credentials into Firebase if possible.
     /// Shows an alert with the error message if the login fails.
@@ -359,7 +389,7 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
         // Only fetch database entries that are available today (not entries for future usage)
         let today = String(Int(Date().timeIntervalSince1970))
         
-        DataService.ds.REF_NOTIFICATIONS.queryEnding(atValue: nil, childKey: today).queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
+        database.dataService.REF_NOTIFICATIONS.queryEnding(atValue: nil, childKey: today).queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
             // The first child is the latest database entry.
             let childSnap = snapshot.children.allObjects[0] as! DataSnapshot
             if childSnap.hasChild(DataBaseNotificationKeys.dismissed) {
@@ -397,8 +427,8 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
                             popover.addButton(button)
                             
                             // After displaying the notification is marked dismissed in the database
-                            self.present(popover, animated: true, completion: {
-                                DataService.ds.setNotificationAsSeen(timestamp: childSnap.key)
+                            self.present(popover, animated: true, completion: { [weak self] in
+                                self?.database.dataService.setNotificationAsSeen(timestamp: childSnap.key)
                             })
                         })
                         
