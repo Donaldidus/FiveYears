@@ -402,7 +402,7 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
                         
                         if childSnap.hasChild(DataBaseNotificationKeys.image) {
                             if let imgURL = childSnap.childSnapshot(forPath: DataBaseNotificationKeys.image).value as? String {
-                                let imgREF = storage.reference(forURL: imgURL)
+                                let imgREF = self.database.dataService.storage.reference(forURL: imgURL)
                                 
                                 notificationDispatchGroup.enter()
                                 imgREF.getData(maxSize: 10 * 1024 * 1024, completion: { data, error in

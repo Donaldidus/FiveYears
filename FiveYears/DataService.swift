@@ -12,17 +12,17 @@ import FirebaseDatabase
 import FirebaseStorage
 
 
-let DB_BASE = Database.database().reference()
-
-let storage = Storage.storage()
-
 class DataService {
-        
+    
+    lazy var DB_BASE = Database.database().reference()
+    
+    lazy var storage = Storage.storage()
+    
     var maxImageSize: Int64 = 10 * 1024 * 1024
     
-    private var _REF_BASE = DB_BASE
-    private var _REF_MEMORIES = DB_BASE.child("memories")
-    private var _REF_NOTIFICATIONS = DB_BASE.child("notifications")
+    private lazy var _REF_BASE = Database.database().reference()
+    private lazy var _REF_MEMORIES = Database.database().reference().child("memories")
+    private lazy var _REF_NOTIFICATIONS = Database.database().reference().child("notifications")
     
     var REF_BASE: DatabaseReference {
         return _REF_BASE
@@ -95,30 +95,6 @@ class DataService {
         memory.images = images
         
         return memory
-        
-//        let imageDownloadDispatchGroup = DispatchGroup()
-//        
-//        for source in imageSources {
-//            if let imgURL = (source as? DataSnapshot)?.value as? String {
-//                let imgREF = storage.reference(forURL: imgURL)
-//                imageDownloadDispatchGroup.enter()
-//                imgREF.getData(maxSize: 10 * 1024 * 1024, completion: { data, error in
-//                    if let error = error {
-//                        print(error.localizedDescription)
-//                        completionHandler(nil, error)
-//                    } else {
-//                        if let img = UIImage(data: data!) {
-//                            memory.images?.append(img)
-//                        }
-//                    }
-//                    imageDownloadDispatchGroup.leave()
-//                })
-//            }
-//        }
-//        
-//        imageDownloadDispatchGroup.notify(queue: DispatchQueue.main, execute: {
-//            completionHandler(memory, nil)
-//        })
     }
 }
 
