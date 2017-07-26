@@ -19,12 +19,14 @@ class DataBaseAccess {
     var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
     
     // look for requested memory in the database and return it if it's not found return nil
-    func memory(for timestamp: String? = nil, completionHandler: @escaping (Memory) -> Void) {
+    func memory(for timestamp: String? = nil, completionHandler: @escaping (MyMemory) -> Void) {
+        print("getting memory")
         // if timestamp is not nil check local database first
         if let timestamp = timestamp, let memory = try! Memory.memoryFor(timestamp: timestamp, in: container!.viewContext) {
-            completionHandler(memory)
+            completionHandler(MyMemory(memory: memory))
             return
         } else {
+            print("memory not in database")
             // fetch memory from the web
             dataService.getMemory(forTimestamp: timestamp, completionHandler: {[weak self] memory in
                 // execute completionHandler
@@ -48,8 +50,10 @@ class DataBaseAccess {
             filePath.appendPathComponent(imageFolder + "/" + fileName + imageType)
             
             if FileManager.default.fileExists(atPath: filePath.absoluteString) {
-                let image = UIImage(contentsOfFile: filePath.absoluteString)
-                completionHandler(image!)
+                DispatchQueue.global(qos: .userInteractive).async {
+                    let image = UIImage(contentsOfFile: filePath.absoluteString)
+                    completionHandler(image!)
+                }
                 return
             } else {
                 // step 2: not found in local file system -> retrieve image from webURL and save it to file system
@@ -59,7 +63,9 @@ class DataBaseAccess {
                     } else {
                         if let image = UIImage(data: data!) {
                             completionHandler(image)
-                            try! self?.save(image: image, named: fileName)
+                            DispatchQueue.global(qos: .background).async {
+                                try! self?.save(image: image, named: fileName)
+                            }
                         }
                     }
                 })
@@ -74,16 +80,17 @@ class DataBaseAccess {
         do {
             var cacheDir = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             cacheDir.appendPathComponent(imageFolder)
-            if let pngImage = UIImagePNGRepresentation(image) {
-                let fileDir = cacheDir.appendingPathComponent(fileName)
-                try pngImage.write(to: fileDir)
+            // create directory
+            try! FileManager.default.createDirectory(at: cacheDir, withIntermediateDirectories: true, attributes: nil)
+                do {
+                if let pngImage = UIImagePNGRepresentation(image) {
+                    let fileDir = cacheDir.appendingPathComponent(fileName + imageType)
+                    try pngImage.write(to: fileDir)
+                }
             }
             
         } catch {
             throw error
         }
     }
-    
-    
-    
 }

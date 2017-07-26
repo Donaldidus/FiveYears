@@ -11,9 +11,9 @@ import CoreData
 
 class Image: NSManagedObject {
     
-    class func findOrCreate(image: Image, for memory: Memory, in context: NSManagedObjectContext) throws -> Image {
+    class func findOrCreate(image: MyImage, for memory: MyMemory, in context: NSManagedObjectContext) throws -> Image {
         let request: NSFetchRequest<Image> = Image.fetchRequest()
-        request.predicate = NSPredicate(format: "directoryUrl = %@", image.webURL!)
+        request.predicate = NSPredicate(format: "webURL = %@", image.webURL)
         
         do {
             let images = try context.fetch(request)

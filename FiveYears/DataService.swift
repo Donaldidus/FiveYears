@@ -36,7 +36,7 @@ class DataService {
         return _REF_NOTIFICATIONS
     }
     
-    func getMemory(forTimestamp timestamp: String? = nil, completionHandler: @escaping (Memory) -> Void) {
+    func getMemory(forTimestamp timestamp: String? = nil, completionHandler: @escaping (MyMemory) -> Void) {
         var timestamp = timestamp
         if timestamp == nil {
             timestamp = String(Int(Date().timeIntervalSince1970))
@@ -67,47 +67,65 @@ class DataService {
     /// - Parameter snapshot: Snapshot incorporating the data.
     
     // completionHandler: @escaping (MyMemory?, Error?) -> Void)
-    private func extract(from snapshot: DataSnapshot) -> Memory {
+    private func extract(from snapshot: DataSnapshot) -> MyMemory {
         let title = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.title).value as? String ?? "No title"
         let text = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.text).value as? String ?? "No text available."
         let timestamp = snapshot.key
         
-        let memory = Memory()
-        memory.title = title
-        memory.text = text
-        memory.timestamp = timestamp
         
         let imageSources = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.images).children
         
-        let images = NSSet()
+        var images = [MyImage]()
         
         for source in imageSources {
             if let source = source as? DataSnapshot, let imageURL = source.value as? String {
                 let fileName = timestamp + "-" + source.key
                 // let image = MemoryImage(image: nil, webUrl: imageURL, fileName: fileName)
-                let image = Image()
-                image.fileName = fileName
-                image.webURL = imageURL
-                images.adding(image)
+                let image = MyImage(webURL: imageURL, fileName: fileName)
+                images.append(image)
             }
         }
-        
-        memory.images = images
-        
+        let memory = MyMemory(title: title, text: text, images: images, timestamp: timestamp)
         return memory
     }
 }
 
 struct MyMemory {
+    init(title: String, text: String, images: [MyImage]?, timestamp: String) {
+        self.title = title
+        self.text = text
+        self.images = images
+        self.timestamp = timestamp
+    }
+    
+    init(memory: Memory) {
+        self.title = memory.title!
+        self.text = memory.text!
+        self.images = [MyImage]()
+        for image in memory.images! {
+            self.images?.append(MyImage(image: image as! Image))
+        }
+        self.timestamp = memory.timestamp!
+    }
+    
     var title: String
     var text: String
-    var images: [MemoryImage]?
+    var images: [MyImage]?
     var timestamp: String
 }
 
-struct MemoryImage {
-    var image: UIImage?
-    var webUrl: String
+struct MyImage {
+    init(webURL: String, fileName: String) {
+        self.webURL = webURL
+        self.fileName = fileName
+    }
+    
+    init(image: Image) {
+        self.webURL = image.webURL!
+        self.fileName = image.fileName!
+    }
+    
+    var webURL: String
     var fileName: String
 }
 

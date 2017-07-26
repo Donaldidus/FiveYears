@@ -26,9 +26,9 @@ class Memory: NSManagedObject {
         }
     }
     
-    class func findOrCreate(memory: Memory, in context: NSManagedObjectContext) throws -> Memory {
+    class func findOrCreate(memory: MyMemory, in context: NSManagedObjectContext) throws -> Memory {
         let request: NSFetchRequest<Memory> = Memory.fetchRequest()
-        request.predicate = NSPredicate(format: "timestamp = %@", memory.timestamp!)
+        request.predicate = NSPredicate(format: "timestamp = %@", memory.timestamp)
         
         do {
             let memories = try context.fetch(request)
@@ -46,9 +46,7 @@ class Memory: NSManagedObject {
         newMemory.text = memory.text
         if let images = memory.images {
             for image in images {
-                if let image = image as? Image {
-                    try! newMemory.images?.adding(Image.findOrCreate(image: image, for: memory, in: context))
-                }
+                try! newMemory.images?.adding(Image.findOrCreate(image: image, for: memory, in: context))
             }
         }
         return newMemory

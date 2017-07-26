@@ -251,38 +251,18 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-    /// Will load the content for the given timestamp from firebase. If no timestamp is given the latest memory will be loaded.
+    /// Will load the content for the given timestamp from database. If no timestamp is given the latest memory will be loaded.
     ///
     /// - Parameter timestamp: Timestamp of the memory that is to be loaded.
     private func reloadContent(forTimestamp timestamp: String? = nil) {
         // Reload content
         loading = true
-        if let key = timestamp {
-            database.memory(for: key, completionHandler: {[weak self] memory in
+        database.memory(for: timestamp, completionHandler: {[weak self] memory in
                 self?.extract(memory: memory)
-            })
-            
-//            // Get the database entry for the given timestamp.
-//            DataService.ds.REF_MEMORIES.child(key).observe(.value, with: { (snapshot) in
-//                // Extract data from the database snapshot.
-//                self.extractData(from: snapshot)
-//            })
-//        } else {
-//            // Get the latest database entry.
-//            
-//            // get the current date and remove decimal (firebase won't accept floating point)
-//            let today = String(Int(Date().timeIntervalSince1970))
-//            
-//            DataService.ds.REF_MEMORIES.queryEnding(atValue: nil, childKey: today).queryLimited(toLast: 1).observe(.value, with: { (snapshot) in
-//                // The first child is the latest database entry.
-//                let childSnap = snapshot.children.allObjects[0] as! DataSnapshot
-//                self.extractData(from: childSnap)
-//            })
-//        }
-        }
+        })
     }
     
-    private func extract(memory: Memory) {
+    private func extract(memory: MyMemory) {
         self.text = memory.text
         
         var imgSources = [ImageSource]()
@@ -290,13 +270,11 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
         let imageDownloadDispatchGroup = DispatchGroup()
         
         for image in memory.images! {
-            if let image = image as? Image {
-                imageDownloadDispatchGroup.enter()
-                try! database.image(named: image.fileName!, from: image.webURL!, completionHandler: { uiimage in
-                    imgSources.append(ImageSource(image: uiimage))
-                    imageDownloadDispatchGroup.leave()
-                })
-            }
+            imageDownloadDispatchGroup.enter()
+            try! database.image(named: image.fileName, from: image.webURL, completionHandler: { uiimage in
+                imgSources.append(ImageSource(image: uiimage))
+                imageDownloadDispatchGroup.leave()
+            })
         }
         
         imageDownloadDispatchGroup.notify(queue: DispatchQueue.main, execute: {
@@ -304,44 +282,6 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
             self.loading = false
         })
     }
-    
-//    /// Extracts the data from a given Firebase Snapshot and assigns it to the text and images property.
-//    /// This will also load the images from the web. Make sure to call this function only if it's necessary.
-//    ///
-//    /// - Parameter snapshot: The snapshot the data is to be extracted from.
-//    private func extractData(from snapshot: DataSnapshot) {
-//        
-//        let text = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.text).value as? String ?? "No text available."
-//        self.text = text
-//        let images = snapshot.childSnapshot(forPath: DataBaseMemoryKeys.images).children
-//        
-//        var imgSources = [ImageSource]()
-//        
-//        let imageDownloadDispatchGroup = DispatchGroup()
-//        
-//        for image in images {
-//            if let imgURL = (image as? DataSnapshot)?.value as? String {
-//                let imgREF = storage.reference(forURL: imgURL)
-//                loading = true
-//                imageDownloadDispatchGroup.enter()
-//                imgREF.getData(maxSize: 10 * 1024 * 1024, completion: { data, error in
-//                    if let error = error {
-//                        print(error.localizedDescription)
-//                    } else {
-//                        if let img = UIImage(data: data!) {
-//                            imgSources.append(ImageSource(image: img))
-//                        }
-//                    }
-//                    imageDownloadDispatchGroup.leave()
-//                })
-//            }
-//        }
-//        
-//        imageDownloadDispatchGroup.notify(queue: DispatchQueue.main, execute: {
-//            self.images = imgSources
-//            self.loading = false
-//        })
-//    }
     
     /// Signes the account given in the credentials into Firebase if possible.
     /// Shows an alert with the error message if the login fails.
