@@ -20,13 +20,11 @@ class DataBaseAccess {
     
     // look for requested memory in the database and return it if it's not found return nil
     func memory(for timestamp: String? = nil, completionHandler: @escaping (MyMemory) -> Void) {
-        print("getting memory")
         // if timestamp is not nil check local database first
         if let timestamp = timestamp, let memory = try! Memory.memoryFor(timestamp: timestamp, in: container!.viewContext) {
             completionHandler(MyMemory(memory: memory))
             return
         } else {
-            print("memory not in database")
             // fetch memory from the web
             dataService.getMemory(forTimestamp: timestamp, completionHandler: {[weak self] memory in
                 // execute completionHandler
@@ -48,8 +46,6 @@ class DataBaseAccess {
         do {
             var filePath = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             filePath.appendPathComponent(imageFolder + "/" + fileName + imageType)
-            
-            print(FileManager.default.fileExists(atPath: filePath.path))
             
             if FileManager.default.fileExists(atPath: filePath.path) {
                 DispatchQueue.global(qos: .userInteractive).async {
