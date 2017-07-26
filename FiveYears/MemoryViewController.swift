@@ -271,9 +271,13 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
         
         for image in memory.images! {
             imageDownloadDispatchGroup.enter()
-            try! database.image(named: image.fileName, from: image.webURL, completionHandler: { uiimage in
-                imgSources.append(ImageSource(image: uiimage))
-                imageDownloadDispatchGroup.leave()
+            database.image(named: image.fileName, from: image.webURL, completionHandler: { (uiimage, error) in
+                if error != nil {
+                    print(error.debugDescription)
+                } else if let uiimage = uiimage {
+                    imgSources.append(ImageSource(image: uiimage))
+                    imageDownloadDispatchGroup.leave()
+                }
             })
         }
         

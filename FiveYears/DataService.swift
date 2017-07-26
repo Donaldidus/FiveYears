@@ -56,6 +56,7 @@ class DataService {
     }
     
     func image(for url: String, completionHandler: @escaping (Data?, Error?) -> Void) {
+        print("downloading image")
         let imageRef = storage.reference(forURL: url)
         imageRef.getData(maxSize: maxImageSize, completion: completionHandler)
     }
@@ -80,7 +81,6 @@ class DataService {
         for source in imageSources {
             if let source = source as? DataSnapshot, let imageURL = source.value as? String {
                 let fileName = timestamp + "-" + source.key
-                // let image = MemoryImage(image: nil, webUrl: imageURL, fileName: fileName)
                 let image = MyImage(webURL: imageURL, fileName: fileName)
                 images.append(image)
             }

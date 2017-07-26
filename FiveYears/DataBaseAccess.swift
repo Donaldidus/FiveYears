@@ -43,16 +43,18 @@ class DataBaseAccess {
     
     
     // returns all UIImages stored in the directory of the timestamp,
-    func image(named fileName: String, from webURL: String, completionHandler: @escaping (UIImage) -> Void) throws {
+    func image(named fileName: String, from webURL: String, completionHandler: @escaping (UIImage?, Error?) -> Void) {
         // step 1: look for image in local file system
         do {
             var filePath = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             filePath.appendPathComponent(imageFolder + "/" + fileName + imageType)
             
-            if FileManager.default.fileExists(atPath: filePath.absoluteString) {
+            print(FileManager.default.fileExists(atPath: filePath.path))
+            
+            if FileManager.default.fileExists(atPath: filePath.path) {
                 DispatchQueue.global(qos: .userInteractive).async {
-                    let image = UIImage(contentsOfFile: filePath.absoluteString)
-                    completionHandler(image!)
+                    let image = UIImage(contentsOfFile: filePath.path)
+                    completionHandler(image, nil)
                 }
                 return
             } else {
@@ -62,16 +64,16 @@ class DataBaseAccess {
                         print(error.debugDescription)
                     } else {
                         if let image = UIImage(data: data!) {
-                            completionHandler(image)
+                            completionHandler(image, nil)
                             DispatchQueue.global(qos: .background).async {
-                                try! self?.save(image: image, named: fileName)
+                                try? self?.save(image: image, named: fileName)
                             }
                         }
                     }
                 })
             }
         } catch {
-            throw error
+            completionHandler(nil, error)
         }
     }
     
@@ -81,7 +83,7 @@ class DataBaseAccess {
             var cacheDir = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             cacheDir.appendPathComponent(imageFolder)
             // create directory
-            try! FileManager.default.createDirectory(at: cacheDir, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: cacheDir, withIntermediateDirectories: true, attributes: nil)
                 do {
                 if let pngImage = UIImagePNGRepresentation(image) {
                     let fileDir = cacheDir.appendingPathComponent(fileName + imageType)
