@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		3D0576621EBB96AF00E8F3A7 /* MemoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */; };
 		3D337CE91EB51E9700CF62FD /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CE81EB51E9700CF62FD /* DataService.swift */; };
-		3D337CEB1EB527A100CF62FD /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D337CEA1EB527A100CF62FD /* Credentials.swift */; };
 		3D483C711F24E99E005A9BB8 /* DatabaseModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D483C6F1F24E99E005A9BB8 /* DatabaseModel.xcdatamodeld */; };
 		3D483C731F252B70005A9BB8 /* DataBaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D483C721F252B70005A9BB8 /* DataBaseAccess.swift */; };
 		3D483C751F252CFC005A9BB8 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D483C741F252CFC005A9BB8 /* Memory.swift */; };
 		3D483C771F25349C005A9BB8 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D483C761F25349C005A9BB8 /* Image.swift */; };
 		3D518FF31F1BD2070019DAB7 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D518FF21F1BD2070019DAB7 /* TextTableViewCell.swift */; };
 		3D645B2D1F28F39900EA169E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D645B2C1F28F39900EA169E /* GoogleService-Info.plist */; };
+		3D645B2F1F292F1100EA169E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D645B2E1F292F1100EA169E /* Credentials.swift */; };
 		3D93A26F1EBB529800536DA9 /* MemoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D93A26E1EBB529800536DA9 /* MemoryTableViewController.swift */; };
 		3D9AECC11F23ED36001A7A76 /* ParallaxHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9AECC01F23ED36001A7A76 /* ParallaxHeaderTableView.swift */; };
 		3D9AECC31F23ED52001A7A76 /* testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9AECC21F23ED52001A7A76 /* testing.swift */; };
@@ -34,13 +34,13 @@
 		25EC580C7CFFB1AB3830C94C /* Pods-FiveYears.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiveYears.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FiveYears/Pods-FiveYears.debug.xcconfig"; sourceTree = "<group>"; };
 		3D0576611EBB96AF00E8F3A7 /* MemoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewCell.swift; sourceTree = "<group>"; };
 		3D337CE81EB51E9700CF62FD /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		3D337CEA1EB527A100CF62FD /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		3D483C701F24E99E005A9BB8 /* DatabaseModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DatabaseModel.xcdatamodel; sourceTree = "<group>"; };
 		3D483C721F252B70005A9BB8 /* DataBaseAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataBaseAccess.swift; sourceTree = "<group>"; };
 		3D483C741F252CFC005A9BB8 /* Memory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		3D483C761F25349C005A9BB8 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		3D518FF21F1BD2070019DAB7 /* TextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		3D645B2C1F28F39900EA169E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3D645B2E1F292F1100EA169E /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		3D93A26E1EBB529800536DA9 /* MemoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryTableViewController.swift; sourceTree = "<group>"; };
 		3D9AECC01F23ED36001A7A76 /* ParallaxHeaderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxHeaderTableView.swift; sourceTree = "<group>"; };
 		3D9AECC21F23ED52001A7A76 /* testing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testing.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				3D9AECC21F23ED52001A7A76 /* testing.swift */,
-				3D337CEA1EB527A100CF62FD /* Credentials.swift */,
+				3D645B2E1F292F1100EA169E /* Credentials.swift */,
 				3DBAE24F1EAA51F800AD136E /* AppDelegate.swift */,
 				3DBAE2561EAA51F800AD136E /* Assets.xcassets */,
 				3DBAE2581EAA51F800AD136E /* LaunchScreen.storyboard */,
@@ -278,13 +278,13 @@
 				3D9AECC11F23ED36001A7A76 /* ParallaxHeaderTableView.swift in Sources */,
 				3D483C731F252B70005A9BB8 /* DataBaseAccess.swift in Sources */,
 				3D483C751F252CFC005A9BB8 /* Memory.swift in Sources */,
-				3D337CEB1EB527A100CF62FD /* Credentials.swift in Sources */,
 				3D9AECC31F23ED52001A7A76 /* testing.swift in Sources */,
 				3D0576621EBB96AF00E8F3A7 /* MemoryTableViewCell.swift in Sources */,
 				3DB760821EC37EBB00BA869B /* SettingsTableViewController.swift in Sources */,
 				3D518FF31F1BD2070019DAB7 /* TextTableViewCell.swift in Sources */,
 				3D483C771F25349C005A9BB8 /* Image.swift in Sources */,
 				3D93A26F1EBB529800536DA9 /* MemoryTableViewController.swift in Sources */,
+				3D645B2F1F292F1100EA169E /* Credentials.swift in Sources */,
 				3DBAE2521EAA51F800AD136E /* MemoryViewController.swift in Sources */,
 				3DBAE2501EAA51F800AD136E /* AppDelegate.swift in Sources */,
 				3DB760841EC3888500BA869B /* UserSettings+UserDefaults.swift in Sources */,

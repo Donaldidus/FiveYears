@@ -125,11 +125,15 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
         // setup the contentView
         setupViews()
         
-        // insert default content until fully loaded
-        insertDefaultContent()
-        
         // try to authenticate the firebase account
         authenticateFirebase()
+        
+        // insert default content until fully loaded
+        if let lastMemory = userSettings.lastViewedMemory {
+            currentMemory = lastMemory
+        } else {
+            insertDefaultContent()
+        }
         
         // if auto reload is enabled reload content
         if let auto = userSettings.autoreloadEnabled {
@@ -149,6 +153,13 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
         applyUserSettings()
         
         tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        var settings = UserDefaults.standard.getUserSettings()
+        settings.lastViewedMemory = currentMemory
+        UserDefaults.standard.save(usersettings: settings)
     }
     
     /// Causes the imageSlideShow take over the entire screen.
@@ -310,7 +321,6 @@ class MemoryViewController: UIViewController, UITableViewDataSource {
             // Maybe ad showing settingsVC here
             present(alert, animated: true, completion: nil)
         }
-        
     }
     
     private func animateReloadButton() {
