@@ -21,6 +21,8 @@ struct UserSettings {
     
     var loginPassword: String?
     
+    var lastViewedMemory: String?
+    
 }
 
 
@@ -31,6 +33,7 @@ struct UserSettingsKeys {
     static let autoreloadEnabled = "autoreloadEnabled"
     static let loginEmail = "loginEmail"
     static let loginPassword = "loginPassword"
+    static let lastViewedMemory = "lastViewedMemory"
 }
 
 // Extending UserDefaults to easily save, delete and get the user settings.
@@ -51,6 +54,9 @@ extension UserDefaults {
         if let pswd = settings.loginPassword {
             set(pswd, forKey: UserSettingsKeys.loginPassword)
         }
+        if let memory = settings.lastViewedMemory {
+            set(memory, forKey: UserSettingsKeys.lastViewedMemory)
+        }
         synchronize()
     }
     
@@ -60,6 +66,7 @@ extension UserDefaults {
         removeObject(forKey: UserSettingsKeys.autoreloadEnabled)
         removeObject(forKey: UserSettingsKeys.loginEmail)
         removeObject(forKey: UserSettingsKeys.loginPassword)
+        removeObject(forKey: UserSettingsKeys.lastViewedMemory)
         synchronize()
     }
     
@@ -79,6 +86,9 @@ extension UserDefaults {
         }
         if let pswd = object(forKey: UserSettingsKeys.loginPassword) as? String {
             settings.loginPassword = pswd
+        }
+        if let memory = object(forKey: UserSettingsKeys.lastViewedMemory) as? String {
+            settings.lastViewedMemory = memory
         }
         return settings
     }
