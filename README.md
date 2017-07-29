@@ -22,3 +22,10 @@ Despite the awesome [Firebase](https://firebase.google.com) tools the app integr
 
 ## Screenshots
 ![](http://i.imgur.com/oblv4o0.gif)
+
+## Versions and Changes
+
+- `1.0` initial version used a segment control to switch between image and text
+- `1.1` redesign using a TableView: images as header, text in one cell
+- `1.1.1` added a parallax header effect and a curved calayer for the headerimages
+- `1.2` added core data & caching: downloaded memories are now stored in core data, images are stored in cache directory of the phone (automatically re-downloaded when purged)
